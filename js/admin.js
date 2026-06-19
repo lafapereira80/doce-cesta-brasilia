@@ -28,7 +28,8 @@ function login(){
         carregarProdutos();
         loadFinanceiro();
 	carregarProducao();
-	carregarAgenda();
+console.log("CHAMANDO AGENDA");	
+carregarAgenda();
 
     }else{
 
