@@ -193,6 +193,12 @@ onclick="abrirAba('producaoTab', this)">
         onclick="abrirAba('financeiroTab', this)">
         💰 Financeiro
     </button>
+
+<button class="tab-btn"
+onclick="abrirAba('producaoTab', this)">
+🏭 Produção
+</button>
+
 <button class="tab-btn"
 onclick="abrirAba('agendaTab', this)">
 📅 Agenda
@@ -507,7 +513,40 @@ class="tab-content">
 
     </div>
 
+<div id="producaoTab"
+class="tab-content">
+
+<h2>🏭 Central de Produção</h2>
+
+<div class="kanban">
+
+    <div class="kanban-column">
+        <h3>📥 Recebidos</h3>
+        <div id="kanbanRecebido"></div>
+    </div>
+
+    <div class="kanban-column">
+        <h3>🏭 Produção</h3>
+        <div id="kanbanProducao"></div>
+    </div>
+
+    <div class="kanban-column">
+        <h3>✅ Prontos</h3>
+        <div id="kanbanPronto"></div>
+    </div>
+
+    <div class="kanban-column">
+        <h3>🚚 Saiu para Entrega</h3>
+        <div id="kanbanEntrega"></div>
+    </div>
+
+    <div class="kanban-column">
+        <h3>✔ Entregues</h3>
+        <div id="kanbanEntregue"></div>
+    </div>
+
 </div>
+
 </div>
 
 <script src="js/admin.js"></script>
