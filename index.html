@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Doce Cesta Brasília</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<header class="hero">
+
+<div class="hero-content">
+
+<img
+src="assets/logo.png"
+alt="Doce Cesta Brasília"
+class="logo">
+
+<h1>Monte sua Cesta Personalizada</h1>
+
+<p>
+Presenteie com amor e torne momentos inesquecíveis.
+</p>
+
+</div>
+
+</header>
+
+<main class="container">
+
+<form id="pedidoForm">
+
+<div class="card">
+
+<h2>Dados do Cliente</h2>
+
+<div class="form-group">
+<label>Nome do Cliente</label>
+<input
+type="text"
+id="nomeCliente"
+required>
+</div>
+
+<div class="form-group">
+<label>Telefone</label>
+<input
+type="tel"
+id="telefone"
+required>
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Cesta</h2>
+
+<div class="form-group">
+<label>Nome da Cesta</label>
+
+<select id="nomeCesta">
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Tipo de Pão</label>
+
+<select id="tipoPao">
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Espalhável</label>
+
+<select id="espalhavel">
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Bebida</label>
+
+<select id="bebida">
+</select>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Adicionais</h2>
+
+<div id="adicionaisContainer"></div>
+
+<div id="uploadContainer" class="hidden">
+
+<h3>Fotos para Polaroid</h3>
+
+<input
+type="file"
+id="fotos"
+multiple
+accept=".jpg,.jpeg,.png">
+
+<p class="hint">
+Selecione até 10 imagens.
+</p>
+
+<div id="preview"></div>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Mensagem</h2>
+
+<textarea
+id="mensagem"
+rows="5"
+placeholder="Digite a mensagem da cesta">
+</textarea>
+
+</div>
+
+<div class="card">
+
+<h2>Entrega</h2>
+
+<div class="form-group">
+<label>Data</label>
+
+<input
+type="date"
+id="dataEntrega"
+required>
+
+</div>
+
+<div class="form-group">
+<label>Hora</label>
+
+<input
+type="time"
+id="horaEntrega"
+required>
+
+</div>
+
+<div class="form-group">
+<label>Endereço</label>
+
+<textarea
+id="endereco"
+rows="4"
+required>
+</textarea>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Pagamento</h2>
+
+<label class="radio">
+<input
+type="radio"
+name="pagamento"
+value="PIX"
+checked>
+
+PIX </label>
+
+<label class="radio">
+<input
+type="radio"
+name="pagamento"
+value="Cartão de Crédito">
+
+Cartão de Crédito </label>
+
+</div>
+
+<div class="card resumo">
+
+<h2>Resumo do Pedido</h2>
+
+<div id="resumoPedido">
+
+<p>
+Selecione os itens para visualizar o valor.
+</p>
+
+</div>
+
+<h3 id="totalPedido">
+Total: R$ 0,00
+</h3>
+
+</div>
+
+<button
+type="submit"
+class="btn-enviar">
+
+Finalizar Pedido
+
+</button>
+
+</form>
+
+<section
+id="sucesso"
+class="success hidden">
+
+<h2>Pedido enviado com sucesso!</h2>
+
+<p id="numeroPedido"></p>
+
+</section>
+
+</main>
+
+<script src="js/app.js"></script>
+
+</body>
+
+</html>

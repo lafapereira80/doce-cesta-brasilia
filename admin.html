@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Doce Cesta Brasília - Administração</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f8f4f1;
+    margin:0;
+    padding:0;
+}
+
+.login-container{
+    max-width:400px;
+    margin:80px auto;
+    background:white;
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 20px rgba(0,0,0,.1);
+}
+
+.admin-container{
+    display:none;
+    padding:20px;
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.logo img{
+    max-width:180px;
+}
+
+input,
+select{
+    width:100%;
+    padding:12px;
+    margin-top:8px;
+    margin-bottom:15px;
+    border:1px solid #ddd;
+    border-radius:8px;
+}
+
+button{
+    background:#8B5E3C;
+    color:white;
+    border:none;
+    padding:12px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:.9;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
+}
+
+.card h2{
+    margin:0;
+    font-size:28px;
+}
+
+.card p{
+    margin:5px 0 0;
+}
+
+.table-container{
+    overflow:auto;
+    background:white;
+    border-radius:12px;
+    padding:15px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    padding:10px;
+    border-bottom:1px solid #eee;
+    text-align:left;
+}
+
+.status{
+    padding:5px 10px;
+    border-radius:20px;
+}
+
+.recebido{
+    background:#fff3cd;
+}
+
+.producao{
+    background:#cce5ff;
+}
+
+.entregue{
+    background:#d4edda;
+}
+
+.cancelado{
+    background:#f8d7da;
+}
+
+.actions select{
+    min-width:170px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login-container" id="loginBox">
+
+    <div class="logo">
+        <h2>Doce Cesta Brasília</h2>
+    </div>
+
+    <input
+        type="text"
+        id="usuario"
+        placeholder="Usuário">
+
+    <input
+        type="password"
+        id="senha"
+        placeholder="Senha">
+
+    <button onclick="login()">
+        Entrar
+    </button>
+
+</div>
+
+<div class="admin-container" id="adminArea">
+
+    <h1>Dashboard de Vendas</h1>
+
+	<div class="tabs">
+
+    <button class="tab-btn active"
+        onclick="abrirAba('dashboardTab', this)">
+        📊 Dashboard
+    </button>
+
+    <button class="tab-btn"
+        onclick="abrirAba('pedidosTab', this)">
+        📦 Pedidos
+    </button>
+
+    <button class="tab-btn"
+        onclick="abrirAba('entregasTab', this)">
+        🚚 Entregas
+    </button>
+
+<button class="tab-btn"
+onclick="abrirAba('producaoTab', this)">
+🏭 Produção
+</button>
+
+    <button class="tab-btn"
+        onclick="abrirAba('produtosTab', this)">
+        🛒 Produtos
+    </button>
+
+    <button class="tab-btn"
+        onclick="abrirAba('financeiroTab', this)">
+        💰 Financeiro
+    </button>
+<button class="tab-btn"
+onclick="abrirAba('agendaTab', this)">
+📅 Agenda
+</button>
+</div>
+	<div id="dashboardTab"
+class="tab-content active">
+    <div class="cards">
+
+        <div class="card">
+            <h2 id="totalPedidos">0</h2>
+            <p>Total</p>
+        </div>
+
+        <div class="card">
+            <h2 id="recebidos">0</h2>
+            <p>Recebidos</p>
+        </div>
+
+        <div class="card">
+            <h2 id="producao">0</h2>
+            <p>Produção</p>
+        </div>
+
+        <div class="card">
+            <h2 id="entregues">0</h2>
+            <p>Entregues</p>
+        </div>
+
+        <div class="card">
+            <h2 id="cancelados">0</h2>
+            <p>Cancelados</p>
+        </div>
+
+    </div>
+</div>
+<hr>
+
+
+<div id="produtosTab"
+class="tab-content">
+<h2>📦 Produtos e Preços</h2>
+
+<div class="table-container">
+
+    <h3>Novo Produto</h3>
+
+    <select id="novaCategoria">
+
+        <option>Cesta</option>
+        <option>Pão</option>
+        <option>Espalhável</option>
+        <option>Bebida</option>
+        <option>Adicional</option>
+
+    </select>
+
+    <input
+        type="text"
+        id="novoProduto"
+        placeholder="Nome do produto">
+
+    <input
+        type="number"
+        id="novoValor"
+        placeholder="Valor">
+
+    <button onclick="adicionarProduto()">
+        Adicionar Produto
+    </button>
+
+    <br><br>
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>Categoria</th>
+                <th>Produto</th>
+                <th>Valor</th>
+                <th>Ativo</th>
+                <th>Ações</th>
+            </tr>
+
+        </thead>
+
+        <tbody id="produtosBody">
+
+        </tbody>
+
+    </table>
+
+</div>
+</div>
+<br>
+
+<div id="producaoTab"
+class="tab-content">
+
+<h2>
+🏭 Central de Produção
+</h2>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Pedido</th>
+<th>Cliente</th>
+<th>Data</th>
+<th>Hora</th>
+<th>Status</th>
+<th>Ação</th>
+
+</tr>
+
+</thead>
+
+<tbody id="producaoBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<div id="entregasTab"
+class="tab-content">
+
+<h2>📅 Entregas Programadas</h2>
+
+<div class="table-container">
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Data</th>
+                <th>Hora</th>
+                <th>Cliente</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody id="deliveriesBody">
+        </tbody>
+
+    </table>
+
+</div>
+
+</div>
+
+<div id="pedidosTab"
+class="tab-content">
+
+    <input
+        type="text"
+        id="busca"
+        placeholder="Buscar cliente">
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Pedido</th>
+                    <th>Cliente</th>
+                    <th>Telefone</th>
+                    <th>Entrega</th>
+                    <th>Status</th>
+                    <th>Fotos</th>
+                    <th>Ações</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="pedidosBody">
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<div id="agendaTab"
+class="tab-content">
+
+<h2>
+📅 Agenda de Entregas
+</h2>
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Hora</th>
+<th>Cliente</th>
+<th>Cesta</th>
+<th>Endereço</th>
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody id="agendaBody">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<div id="financeiroTab"
+class="tab-content">
+
+    <div class="cards">
+
+        <div class="card">
+            <h2 id="fatHoje">R$ 0</h2>
+            <p>Hoje</p>
+        </div>
+
+        <div class="card">
+            <h2 id="fatMes">R$ 0</h2>
+            <p>Mês</p>
+        </div>
+
+        <div class="card">
+            <h2 id="ticketMedio">R$ 0</h2>
+            <p>Ticket Médio</p>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- MODAL DETALHES DO PEDIDO -->
+
+<div id="pedidoModal" style="display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.7);
+z-index:9999;">
+
+    <div style="
+    background:white;
+    width:90%;
+    max-width:700px;
+    margin:30px auto;
+    padding:20px;
+    border-radius:15px;
+    max-height:90vh;
+    overflow:auto;">
+
+        <h2>Detalhes do Pedido</h2>
+
+        <div id="pedidoDetalhes"></div>
+
+        <br>
+
+      <button onclick="imprimirPedido()">
+    Imprimir Pedido
+</button>
+
+<button onclick="fecharModal()">
+    Fechar
+</button>
+
+    </div>
+
+<div id="financeiroTab"
+class="tab-content">
+
+    <div class="cards">
+
+        <div class="card">
+            <h2 id="fatHoje">R$ 0</h2>
+            <p>Hoje</p>
+        </div>
+
+        <div class="card">
+            <h2 id="fatMes">R$ 0</h2>
+            <p>Mês</p>
+        </div>
+
+        <div class="card">
+            <h2 id="ticketMedio">R$ 0</h2>
+            <p>Ticket Médio</p>
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+<script src="js/admin.js"></script>
+
+</body>
+</html>
