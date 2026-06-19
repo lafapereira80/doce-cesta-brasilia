@@ -478,7 +478,7 @@ Pagamento: ${payload.pagamento}`
 );
 
 window.open(
-`https://wa.me/5561984533575O?text=${mensagem}`,
+`https://wa.me/5561984533575?text=${mensagem}`,
 '_blank'
 );
 
