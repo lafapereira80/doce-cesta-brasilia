@@ -778,33 +778,63 @@ async function avancarStatus(
 
 async function carregarAgenda(){
 
+    const response =
+        await fetch(
+            API_URL + "?action=orders"
+        );
+
+    const dados =
+        await response.json();
+
     const tbody =
         document.getElementById(
             "agendaBody"
         );
 
-    tbody.innerHTML = `
+    tbody.innerHTML = "";
 
-        <tr>
-            <td colspan="5"
-            style="
-                background:#8B5E3C;
-                color:white;
-                font-weight:bold;
-            ">
-                📅 HOJE
-            </td>
-        </tr>
+    const hoje =
+        new Date();
 
-        <tr>
-            <td>08:00</td>
-            <td>Teste</td>
-            <td>Cesta Premium</td>
-            <td>Brasília</td>
-            <td>Produção</td>
-        </tr>
+    const hojeStr =
+        hoje.toISOString().split("T")[0];
 
-    `;
+    let encontrados = 0;
+
+    dados.slice(1).forEach(row=>{
+
+        if(!row[10]) return;
+
+        const dataPedido =
+            new Date(row[10])
+            .toISOString()
+            .split("T")[0];
+
+        if(dataPedido === hojeStr){
+
+            encontrados++;
+
+            const tr =
+                document.createElement("tr");
+
+            tr.innerHTML = `
+                <td>${row[11]}</td>
+                <td>${row[2]}</td>
+                <td>${row[4]}</td>
+                <td>${row[12]}</td>
+                <td>${row[14]}</td>
+            `;
+
+            tbody.appendChild(tr);
+
+        }
+
+    });
+
+    console.log(
+        "PEDIDOS DE HOJE:",
+        encontrados
+    );
 
 }
 
