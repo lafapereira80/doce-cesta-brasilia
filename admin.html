@@ -398,42 +398,31 @@ class="tab-content">
 <div id="agendaTab"
 class="tab-content">
 
-<h2>
-📅 Agenda de Entregas
-</h2>
+    <h2>📅 Agenda de Entregas</h2>
 
-<div class="table-container">
+    <div class="table-container">
 
-<table>
+        <table>
 
-<thead>
+            <thead>
+                <tr>
+                    <th>Hora</th>
+                    <th>Cliente</th>
+                    <th>Cesta</th>
+                    <th>Endereço</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
 
-<tr>
+            <tbody id="agendaBody"></tbody>
 
-<th>Hora</th>
-<th>Cliente</th>
-<th>Cesta</th>
-<th>Endereço</th>
-<th>Status</th>
+        </table>
 
-</tr>
-
-</thead>
-
-<tbody id="agendaBody">
-
-</tbody>
-
-</table>
-
-</div>
+    </div>
 
 </div>
 
 <div id="financeiroTab"
-class="tab-content">
-
-   <div id="financeiroTab"
 class="tab-content">
 
     <div class="cards">
@@ -456,9 +445,48 @@ class="tab-content">
     </div>
 
 </div>
+
+<div id="producaoTab"
+class="tab-content">
+
+    <h2>🏭 Central de Produção</h2>
+
+    <div class="kanban">
+
+        <div class="kanban-column">
+            <h3>📥 Recebidos</h3>
+            <div id="kanbanRecebido"></div>
+        </div>
+
+        <div class="kanban-column">
+            <h3>🏭 Produção</h3>
+            <div id="kanbanProducao"></div>
+        </div>
+
+        <div class="kanban-column">
+            <h3>✅ Prontos</h3>
+            <div id="kanbanPronto"></div>
+        </div>
+
+        <div class="kanban-column">
+            <h3>🚚 Saiu para Entrega</h3>
+            <div id="kanbanEntrega"></div>
+        </div>
+
+        <div class="kanban-column">
+            <h3>✔ Entregues</h3>
+            <div id="kanbanEntregue"></div>
+        </div>
+
+    </div>
+
+</div>
+
 <!-- MODAL DETALHES DO PEDIDO -->
 
-<div id="pedidoModal" style="display:none;
+<div id="pedidoModal"
+style="
+display:none;
 position:fixed;
 top:0;
 left:0;
@@ -483,49 +511,15 @@ z-index:9999;">
 
         <br>
 
-      <button onclick="imprimirPedido()">
-    Imprimir Pedido
-</button>
+        <button onclick="imprimirPedido()">
+            Imprimir Pedido
+        </button>
 
-<button onclick="fecharModal()">
-    Fechar
-</button>
+        <button onclick="fecharModal()">
+            Fechar
+        </button>
 
     </div>
-
-<div id="producaoTab"
-class="tab-content">
-
-<h2>🏭 Central de Produção</h2>
-
-<div class="kanban">
-
-    <div class="kanban-column">
-        <h3>📥 Recebidos</h3>
-        <div id="kanbanRecebido"></div>
-    </div>
-
-    <div class="kanban-column">
-        <h3>🏭 Produção</h3>
-        <div id="kanbanProducao"></div>
-    </div>
-
-    <div class="kanban-column">
-        <h3>✅ Prontos</h3>
-        <div id="kanbanPronto"></div>
-    </div>
-
-    <div class="kanban-column">
-        <h3>🚚 Saiu para Entrega</h3>
-        <div id="kanbanEntrega"></div>
-    </div>
-
-    <div class="kanban-column">
-        <h3>✔ Entregues</h3>
-        <div id="kanbanEntregue"></div>
-    </div>
-
-</div>
 
 </div>
 
