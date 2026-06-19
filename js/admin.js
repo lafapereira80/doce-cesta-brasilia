@@ -784,41 +784,9 @@ async function carregarAgenda(){
     const dados =
         await response.json();
 
-    const tbody =
-        document.getElementById(
-            "agendaBody"
-        );
-
-    tbody.innerHTML = "";
-
-    const hoje =
-        new Date()
-        .toISOString()
-        .split("T")[0];
-
-    dados
-    .slice(1)
-    .filter(row => row[10] === hoje)
-    .sort((a,b)=>
-        a[11].localeCompare(b[11])
-    )
-    .forEach(row=>{
-
-        const tr =
-            document.createElement("tr");
-
-        tr.innerHTML = `
-
-            <td>${row[11]}</td>
-            <td>${row[2]}</td>
-            <td>${row[4]}</td>
-            <td>${row[12]}</td>
-            <td>${row[14]}</td>
-
-        `;
-
-        tbody.appendChild(tr);
-
-    });
+    console.log(
+        "DATA DO PRIMEIRO PEDIDO:",
+        dados[1][10]
+    );
 
 }
