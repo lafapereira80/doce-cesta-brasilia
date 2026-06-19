@@ -458,6 +458,30 @@ if(result.success){
     "Pedido: " +
     result.orderId;
 
+const mensagem = encodeURIComponent(
+
+`🌷 Doce Cesta Brasília
+
+Pedido: ${result.orderId}
+
+Cliente: ${payload.nomeCliente}
+
+Telefone: ${payload.telefone}
+
+Cesta: ${payload.nomeCesta}
+
+Entrega: ${payload.dataEntrega}
+
+Horário: ${payload.horaEntrega}
+
+Pagamento: ${payload.pagamento}`
+);
+
+window.open(
+`https://wa.me/5561984533575O?text=${mensagem}`,
+'_blank'
+);
+
 }else{
 
   alert(
