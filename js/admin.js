@@ -792,22 +792,151 @@ async function carregarAgenda(){
 
     tbody.innerHTML = "";
 
-    console.log("TOTAL REGISTROS:", dados.length);
-    console.log("PRIMEIRO REGISTRO:", dados[1]);
+    const hoje = new Date();
 
-    dados
-    .slice(1)
-    .forEach(row=>{
+    const hojeStr =
+        hoje.toISOString().split("T")[0];
+
+    const amanha = new Date();
+
+    amanha.setDate(
+        amanha.getDate() + 1
+    );
+
+    const amanhaStr =
+        amanha.toISOString().split("T")[0];
+
+    const seteDias = new Date();
+
+    seteDias.setDate(
+        seteDias.getDate() + 7
+    );
+
+    const hojePedidos = [];
+    const amanhaPedidos = [];
+    const futurosPedidos = [];
+
+    dados.slice(1).forEach(row=>{
+
+        if(!row[10]) return;
+
+        const dataPedido =
+            new Date(row[10]);
+
+        const dataStr =
+            dataPedido
+            .toISOString()
+            .split("T")[0];
+
+        if(dataStr === hojeStr){
+
+            hojePedidos.push(row);
+
+        }
+        else if(dataStr === amanhaStr){
+
+            amanhaPedidos.push(row);
+
+        }
+        else if(
+            dataPedido <= seteDias
+        ){
+
+            futurosPedidos.push(row);
+
+        }
+
+    });
+
+    adicionarGrupoAgenda(
+        tbody,
+        "📅 HOJE",
+        hojePedidos
+    );
+
+    adicionarGrupoAgenda(
+        tbody,
+        "📅 AMANHÃ",
+        amanhaPedidos
+    );
+
+    adicionarGrupoAgenda(
+        tbody,
+        "📅 PRÓXIMOS 7 DIAS",
+        futurosPedidos
+    );
+
+}
+
+function adicionarGrupoAgenda(
+    tbody,
+    titulo,
+    pedidos
+){
+
+    const trTitulo =
+        document.createElement("tr");
+
+    trTitulo.innerHTML = `
+        <td colspan="5"
+        style="
+            background:#8B5E3C;
+            color:white;
+            font-weight:bold;
+        ">
+            ${titulo}
+        </td>
+    `;
+
+    tbody.appendChild(
+        trTitulo
+    );
+
+    if(pedidos.length === 0){
 
         const tr =
             document.createElement("tr");
 
         tr.innerHTML = `
-            <td>${row[11] || ""}</td>
-            <td>${row[2] || ""}</td>
-            <td>${row[4] || ""}</td>
-            <td>${row[12] || ""}</td>
-            <td>${row[14] || ""}</td>
+            <td colspan="5">
+                Nenhum pedido
+            </td>
+        `;
+
+        tbody.appendChild(tr);
+
+        return;
+
+    }
+
+    pedidos
+    .sort((a,b)=>
+        new Date(a[11]) -
+        new Date(b[11])
+    )
+    .forEach(row=>{
+
+        const hora =
+            row[11]
+            ? new Date(row[11])
+            .toLocaleTimeString(
+                'pt-BR',
+                {
+                    hour:'2-digit',
+                    minute:'2-digit'
+                }
+            )
+            : "";
+
+        const tr =
+            document.createElement("tr");
+
+        tr.innerHTML = `
+            <td>${hora}</td>
+            <td>${row[2]}</td>
+            <td>${row[4]}</td>
+            <td>${row[12]}</td>
+            <td>${row[14]}</td>
         `;
 
         tbody.appendChild(tr);
