@@ -775,96 +775,36 @@ async function avancarStatus(
 
 }
 
+
 async function carregarAgenda(){
-
-    const response =
-        await fetch(
-            API_URL + "?action=orders"
-        );
-
-    const dados =
-        await response.json();
 
     const tbody =
         document.getElementById(
             "agendaBody"
         );
 
-    tbody.innerHTML = "";
+    tbody.innerHTML = `
 
-    const hoje = new Date();
+        <tr>
+            <td colspan="5"
+            style="
+                background:#8B5E3C;
+                color:white;
+                font-weight:bold;
+            ">
+                📅 HOJE
+            </td>
+        </tr>
 
-    const hojeStr =
-        hoje.toISOString().split("T")[0];
+        <tr>
+            <td>08:00</td>
+            <td>Teste</td>
+            <td>Cesta Premium</td>
+            <td>Brasília</td>
+            <td>Produção</td>
+        </tr>
 
-    const amanha = new Date();
-
-    amanha.setDate(
-        amanha.getDate() + 1
-    );
-
-    const amanhaStr =
-        amanha.toISOString().split("T")[0];
-
-    const seteDias = new Date();
-
-    seteDias.setDate(
-        seteDias.getDate() + 7
-    );
-
-    const hojePedidos = [];
-    const amanhaPedidos = [];
-    const futurosPedidos = [];
-
-    dados.slice(1).forEach(row=>{
-
-        if(!row[10]) return;
-
-        const dataPedido =
-            new Date(row[10]);
-
-        const dataStr =
-            dataPedido
-            .toISOString()
-            .split("T")[0];
-
-        if(dataStr === hojeStr){
-
-            hojePedidos.push(row);
-
-        }
-        else if(dataStr === amanhaStr){
-
-            amanhaPedidos.push(row);
-
-        }
-        else if(
-            dataPedido <= seteDias
-        ){
-
-            futurosPedidos.push(row);
-
-        }
-
-    });
-
-    adicionarGrupoAgenda(
-        tbody,
-        "📅 HOJE",
-        hojePedidos
-    );
-
-    adicionarGrupoAgenda(
-        tbody,
-        "📅 AMANHÃ",
-        amanhaPedidos
-    );
-
-    adicionarGrupoAgenda(
-        tbody,
-        "📅 PRÓXIMOS 7 DIAS",
-        futurosPedidos
-    );
+    `;
 
 }
 
