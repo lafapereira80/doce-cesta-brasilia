@@ -817,13 +817,23 @@ async function carregarAgenda(){
             const tr =
                 document.createElement("tr");
 
-            tr.innerHTML = `
-                <td>${row[11]}</td>
-                <td>${row[2]}</td>
-                <td>${row[4]}</td>
-                <td>${row[12]}</td>
-                <td>${row[14]}</td>
-            `;
+const hora =
+new Date(row[11])
+.toLocaleTimeString(
+'pt-BR',
+{
+hour:'2-digit',
+minute:'2-digit'
+}
+);
+
+           tr.innerHTML = `
+    <td>${hora}</td>
+    <td>${row[2]}</td>
+    <td>${row[4]}</td>
+    <td>${row[12]}</td>
+    <td>${row[14]}</td>
+`;
 
             tbody.appendChild(tr);
 
