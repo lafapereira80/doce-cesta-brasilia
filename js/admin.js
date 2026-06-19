@@ -784,9 +784,6 @@ async function carregarAgenda(){
     const dados =
         await response.json();
 
-    console.log(
-        "DATA DO PRIMEIRO PEDIDO:",
-        dados[1][10]
-    );
+    console.log("DADOS AGENDA:", dados);
 
 }
