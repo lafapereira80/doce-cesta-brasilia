@@ -669,6 +669,35 @@ async function loadDashboard() {
         ).innerHTML =
         dados.cancelados || 0;
 
+document.getElementById(
+"fatHoje"
+).innerHTML =
+"R$ " +
+Number(
+dados.faturamentoHoje || 0
+).toFixed(2);
+
+document.getElementById(
+"fatMes"
+).innerHTML =
+"R$ " +
+Number(
+dados.faturamentoMes || 0
+).toFixed(2);
+
+document.getElementById(
+"pedidosMes"
+).innerHTML =
+dados.pedidosMes || 0;
+
+document.getElementById(
+"ticketMedio"
+).innerHTML =
+"R$ " +
+Number(
+dados.ticketMedio || 0
+).toFixed(2);
+
     } catch(err) {
 
         console.error(
