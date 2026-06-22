@@ -977,12 +977,38 @@ minute:'2-digit'
 }
 );
 
-           tr.innerHTML = `
-    <td>${hora}</td>
-    <td>${row[2]}</td>
-    <td>${row[4]}</td>
-    <td>${row[12]}</td>
-    <td>${row[14]}</td>
+const endereco =
+row[12] || "";
+
+let regiao = "Brasília";
+
+if(endereco.includes("Asa Sul"))
+regiao = "Asa Sul";
+
+else if(endereco.includes("Asa Norte"))
+regiao = "Asa Norte";
+
+else if(endereco.includes("Guará"))
+regiao = "Guará";
+
+else if(endereco.includes("Águas Claras"))
+regiao = "Águas Claras";
+
+else if(endereco.includes("Taguatinga"))
+regiao = "Taguatinga";
+
+else if(endereco.includes("Sudoeste"))
+regiao = "Sudoeste";
+
+  tr.innerHTML = `
+
+<td>${row[11]}</td>
+<td>${row[2]}</td>
+<td>${row[4]}</td>
+<td>${regiao}</td>
+<td>${row[12]}</td>
+<td>${row[14]}</td>
+
 `;
 
             tbody.appendChild(tr);
@@ -1072,5 +1098,109 @@ function adicionarGrupoAgenda(
         tbody.appendChild(tr);
 
     });
+
+}
+
+function imprimirRota(){
+
+    const linhas =
+    document.querySelectorAll(
+        "#agendaBody tr"
+    );
+
+    let html = "";
+
+    linhas.forEach(linha=>{
+
+        const colunas =
+        linha.querySelectorAll("td");
+
+        html += `
+
+        <p>
+
+        <b>Horário:</b>
+        ${colunas[0].innerText}
+
+        <br>
+
+        <b>Cliente:</b>
+        ${colunas[1].innerText}
+
+        <br>
+
+        <b>Cesta:</b>
+        ${colunas[2].innerText}
+
+        <br>
+
+        <b>Endereço:</b>
+        ${colunas[3].innerText}
+
+        </p>
+
+        <hr>
+
+        `;
+
+    });
+
+    const janela =
+    window.open(
+        "",
+        "_blank",
+        "width=800,height=900"
+    );
+
+    janela.document.write(`
+
+    <html>
+
+    <head>
+
+    <title>
+    Rota de Entregas
+    </title>
+
+    <style>
+
+    body{
+        font-family:Arial;
+        padding:20px;
+    }
+
+    h1{
+        text-align:center;
+    }
+
+    </style>
+
+    </head>
+
+    <body>
+
+    <h1>
+    DOCE CESTA BRASÍLIA
+    </h1>
+
+    <h2>
+    ROTA DE ENTREGAS
+    </h2>
+
+    ${html}
+
+    </body>
+
+    </html>
+
+    `);
+
+    janela.document.close();
+
+    setTimeout(()=>{
+
+        janela.print();
+
+    },500);
 
 }
