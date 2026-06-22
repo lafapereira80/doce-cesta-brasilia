@@ -30,6 +30,7 @@ function login(){
 	carregarProducao();
 console.log("CHAMANDO AGENDA");	
 carregarAgenda();
+carregarTopProdutos();
 
     }else{
 
@@ -1231,5 +1232,41 @@ function imprimirRota(){
         janela.print();
 
     },500);
+
+}
+
+async function carregarTopProdutos(){
+
+const response =
+await fetch(
+API_URL + "?action=topProdutos"
+);
+
+const dados =
+await response.json();
+
+const tbody =
+document.getElementById(
+"topProdutosBody"
+);
+
+tbody.innerHTML = "";
+
+dados.forEach((item,index)=>{
+
+const tr =
+document.createElement("tr");
+
+tr.innerHTML = `
+
+<td>${index+1}º</td>
+<td>${item[0]}</td>
+<td>${item[1]}</td>
+
+`;
+
+tbody.appendChild(tr);
+
+});
 
 }
