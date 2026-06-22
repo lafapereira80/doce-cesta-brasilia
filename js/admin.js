@@ -256,7 +256,9 @@ function abrirPedido(row){
         .getElementById("pedidoDetalhes")
         .innerHTML = html;
 
+console.log("CLIENTE:", row[2]);
 carregarHistoricoCliente(row[2]);
+
 
     document
         .getElementById("pedidoModal")
