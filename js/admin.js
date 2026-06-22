@@ -681,100 +681,158 @@ async function loadDashboard() {
 }
 async function carregarProducao(){
 
-    const response =
-        await fetch(
-            API_URL + "?action=orders"
-        );
+const response =
+await fetch(
+API_URL + "?action=orders"
+);
 
-    const dados =
-        await response.json();
+const dados =
+await response.json();
 
-    const tbody =
-        document.getElementById(
-            "producaoBody"
-        );
+document.getElementById(
+"kanbanRecebido"
+).innerHTML = "";
 
-    tbody.innerHTML = "";
+document.getElementById(
+"kanbanProducao"
+).innerHTML = "";
 
-    dados.slice(1).forEach(row=>{
+document.getElementById(
+"kanbanPronto"
+).innerHTML = "";
 
-        const status =
-            row[14];
+document.getElementById(
+"kanbanEntrega"
+).innerHTML = "";
 
-        if(
-            status === "Entregue" ||
-            status === "Cancelado"
-        ){
-            return;
-        }
+document.getElementById(
+"kanbanEntregue"
+).innerHTML = "";
 
-        const tr =
-            document.createElement("tr");
+dados.slice(1).forEach(row=>{
 
-        tr.innerHTML = `
+const status = row[14];
 
-            <td>${row[0]}</td>
-            <td>${row[2]}</td>
-            <td>${row[10]}</td>
-            <td>${row[11]}</td>
-            <td>${status}</td>
+const card = document.createElement("div");
 
-            <td>
+card.className =
+"kanban-card";
 
-            <button
-            onclick="
-            avancarStatus(
-            '${row[0]}',
-            '${status}'
-            )">
+card.innerHTML = `
 
-            Avançar
+<h4>${row[2]}</h4>
 
-            </button>
+<p>
+Pedido:
+${row[0]}
+</p>
 
-            </td>
+<p>
+📅 ${row[10]}
+</p>
 
-        `;
+<p>
+⏰ ${row[11]}
+</p>
 
-        tbody.appendChild(tr);
+<button
+onclick="
+avancarStatus(
+'${row[0]}',
+'${status}'
+)">
+Avançar
+</button>
 
-    });
+`;
+
+if(status==="Recebido"){
+
+document
+.getElementById(
+"kanbanRecebido"
+)
+.appendChild(card);
+
+}
+
+else if(status==="Produção"){
+
+document
+.getElementById(
+"kanbanProducao"
+)
+.appendChild(card);
+
+}
+
+else if(status==="Pronto"){
+
+document
+.getElementById(
+"kanbanPronto"
+)
+.appendChild(card);
+
+}
+
+else if(
+status==="Saiu para Entrega"
+){
+
+document
+.getElementById(
+"kanbanEntrega"
+)
+.appendChild(card);
+
+}
+
+else if(
+status==="Entregue"
+){
+
+document
+.getElementById(
+"kanbanEntregue"
+)
+.appendChild(card);
+
+}
+
+});
 
 }
 
 async function avancarStatus(
-    pedido,
-    status
+pedido,
+status
 ){
 
-    let novoStatus =
-        status;
+let novoStatus = status;
 
-    if(status==="Recebido"){
-        novoStatus="Produção";
-    }
-    else if(
-        status==="Produção"
-    ){
-        novoStatus=
-        "Saiu para Entrega";
-    }
-    else if(
-        status==="Saiu para Entrega"
-    ){
-        novoStatus=
-        "Entregue";
-    }
+if(status==="Recebido")
+novoStatus="Produção";
 
-    await alterarStatus(
-        pedido,
-        novoStatus
-    );
+else if(status==="Produção")
+novoStatus="Pronto";
 
-    carregarProducao();
+else if(status==="Pronto")
+novoStatus="Saiu para Entrega";
+
+else if(status==="Saiu para Entrega")
+novoStatus="Entregue";
+
+await alterarStatus(
+pedido,
+novoStatus
+);
+
+carregarProducao();
+
+loadDashboard();
 
 }
-
 
 async function carregarAgenda(){
 

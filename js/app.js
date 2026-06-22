@@ -435,30 +435,20 @@ const result =
 if(result.success){
 
   document
-    .getElementById(
-      "pedidoForm"
-    )
-    .classList.add(
-      "hidden"
-    );
+    .getElementById("pedidoForm")
+    .classList.add("hidden");
 
   document
-    .getElementById(
-      "sucesso"
-    )
-    .classList.remove(
-      "hidden"
-    );
+    .getElementById("sucesso")
+    .classList.remove("hidden");
 
   document
-    .getElementById(
-      "numeroPedido"
-    )
+    .getElementById("numeroPedido")
     .innerHTML =
     "Pedido: " +
     result.orderId;
 
-const mensagem = encodeURIComponent(
+  const mensagem = encodeURIComponent(
 
 `🌷 Doce Cesta Brasília
 
@@ -470,26 +460,31 @@ Telefone: ${payload.telefone}
 
 Cesta: ${payload.nomeCesta}
 
+Pão: ${payload.tipoPao}
+
+Espalhável: ${payload.espalhavel}
+
+Bebida: ${payload.bebida}
+
+Adicionais: ${payload.adicionais.join(", ")}
+
 Entrega: ${payload.dataEntrega}
 
 Horário: ${payload.horaEntrega}
 
 Pagamento: ${payload.pagamento}`
-);
+  );
 
-window.open(
-`https://wa.me/5561984533575?text=${mensagem}`,
-'_blank'
-);
+  window.open(
+    `https://wa.me/5561984533575?text=${mensagem}`,
+    '_blank'
+  );
 
 }else{
 
-  alert(
-    result.error
-  );
+  alert(result.error);
 
 }
-
 
 } catch(err){
 
