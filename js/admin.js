@@ -837,6 +837,89 @@ pedido,
 novoStatus
 );
 
+/* PROCURA O PEDIDO NA TABELA */
+
+const response =
+await fetch(
+API_URL + "?action=orders"
+);
+
+const dados =
+await response.json();
+
+const pedidoAtual =
+dados
+.slice(1)
+.find(
+row => row[0] === pedido
+);
+
+if(pedidoAtual){
+
+const cliente =
+pedidoAtual[2];
+
+const telefone =
+String(pedidoAtual[3])
+.replace(/\D/g,'');
+
+let mensagem = "";
+
+if(novoStatus==="Produção"){
+
+mensagem =
+`Olá ${cliente}! 😊
+
+Seu pedido ${pedido}
+entrou em produção.
+
+Estamos preparando tudo com carinho.`;
+
+}
+
+else if(novoStatus==="Pronto"){
+
+mensagem =
+`Olá ${cliente}! 🎁
+
+Seu pedido ${pedido}
+já está pronto.`;
+
+}
+
+else if(novoStatus==="Saiu para Entrega"){
+
+mensagem =
+`Olá ${cliente}! 🚚
+
+Seu pedido ${pedido}
+saiu para entrega e chegará em breve.`;
+
+}
+
+else if(novoStatus==="Entregue"){
+
+mensagem =
+`Olá ${cliente}! ❤️
+
+Seu pedido ${pedido}
+foi entregue.
+
+Obrigado pela preferência!`;
+
+}
+
+if(mensagem){
+
+window.open(
+`https://wa.me/55${telefone}?text=${encodeURIComponent(mensagem)}`,
+"_blank"
+);
+
+}
+
+}
+
 carregarProducao();
 
 loadDashboard();
