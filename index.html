@@ -61,8 +61,6 @@ id="telefone"
 placeholder="(61)98453-3575"
 maxlength="14"
 inputmode="numeric"
-pattern="[0-9]{10,11}"
-required
 onkeypress="return somenteNumeros(event)"
 oninput="mascaraTelefone(this)">
 </div>
@@ -323,54 +321,51 @@ return true;
 
 function mascaraTelefone(campo){
 
-let valor =
-campo.value.replace(/\D/g,'');
+    let valor =
+    campo.value.replace(/\D/g,'');
 
-if(valor.length > 11){
-valor = valor.substring(0,11);
+    if(valor.length > 11){
+        valor = valor.substring(0,11);
+    }
+
+    if(valor.length > 10){
+
+        campo.value =
+        "(" +
+        valor.substring(0,2) +
+        ")" +
+        valor.substring(2,7) +
+        "-" +
+        valor.substring(7);
+
+    }
+    else if(valor.length > 6){
+
+        campo.value =
+        "(" +
+        valor.substring(0,2) +
+        ")" +
+        valor.substring(2,6) +
+        "-" +
+        valor.substring(6);
+
+    }
+    else if(valor.length > 2){
+
+        campo.value =
+        "(" +
+        valor.substring(0,2) +
+        ")" +
+        valor.substring(2);
+
+    }
+    else{
+
+        campo.value = valor;
+
+    }
+
 }
-
-if(valor.length > 10){
-
-campo.value =
-"(" +
-valor.substring(0,2) +
-")" +
-valor.substring(2,7) +
-"-" +
-valor.substring(7);
-
-}
-else if(valor.length > 6){
-
-campo.value =
-"(" +
-valor.substring(0,2) +
-")" +
-valor.substring(2,6) +
-"-" +
-valor.substring(6);
-
-}
-else if(valor.length > 2){
-
-campo.value =
-"(" +
-valor.substring(0,2) +
-")" +
-valor.substring(2);
-
-}
-else{
-
-campo.value = valor;
-
-}
-
-}
-
-</script>
-
 </body>
 
 </html>
