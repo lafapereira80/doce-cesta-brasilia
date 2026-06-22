@@ -1000,9 +1000,9 @@ regiao = "Taguatinga";
 else if(endereco.includes("Sudoeste"))
 regiao = "Sudoeste";
 
-  tr.innerHTML = `
+ tr.innerHTML = `
 
-<td>${row[11]}</td>
+<td>${hora}</td>
 <td>${row[2]}</td>
 <td>${row[4]}</td>
 <td>${regiao}</td>
