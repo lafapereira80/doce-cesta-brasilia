@@ -689,6 +689,9 @@ API_URL + "?action=orders"
 const dados =
 await response.json();
 
+console.log("TOTAL PEDIDOS:", dados.length);
+console.log("PRIMEIRO PEDIDO:", dados[1]);
+
 document.getElementById(
 "kanbanRecebido"
 ).innerHTML = "";
@@ -710,6 +713,12 @@ document.getElementById(
 ).innerHTML = "";
 
 dados.slice(1).forEach(row=>{
+
+console.log(
+"STATUS:",
+row[0],
+row[14]
+);
 
 const status = row[14];
 
