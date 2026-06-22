@@ -256,6 +256,8 @@ function abrirPedido(row){
         .getElementById("pedidoDetalhes")
         .innerHTML = html;
 
+carregarHistoricoCliente(row[2]);
+
     document
         .getElementById("pedidoModal")
         .style.display = "block";
@@ -1268,5 +1270,94 @@ tr.innerHTML = `
 tbody.appendChild(tr);
 
 });
+
+}
+
+async function carregarHistoricoCliente(nome){
+
+const response =
+await fetch(
+
+API_URL +
+
+"?action=historicoCliente&nome=" +
+
+encodeURIComponent(nome)
+
+);
+
+const dados =
+await response.json();
+
+let produtosHtml = "";
+
+for(const produto in dados.produtos){
+
+produtosHtml += `
+
+<li>
+
+${produto}
+(${dados.produtos[produto]}x)
+
+</li>
+
+`;
+
+}
+
+document.getElementById(
+"historicoCliente"
+).innerHTML = `
+
+<p>
+
+📦 Total de Pedidos: <b>${dados.totalPedidos}</b>
+
+</p>
+
+<p>
+
+💰 Total Gasto: <b>
+
+${Number(
+dados.totalGasto
+).toLocaleString(
+'pt-BR',
+{
+style:'currency',
+currency:'BRL'
+}
+)}
+
+</b>
+
+</p>
+
+<p>
+
+🎯 Ticket Médio: <b>
+
+${Number(
+dados.ticketMedio
+).toLocaleString(
+'pt-BR',
+{
+style:'currency',
+currency:'BRL'
+}
+)}
+
+</b>
+
+</p>
+
+<ul>
+
+${produtosHtml}
+
+</ul>
+
+`;
 
 }
