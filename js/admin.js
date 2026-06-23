@@ -1,7 +1,7 @@
 const API_URL =
 "https://script.google.com/macros/s/AKfycbyYZqOtzsls8pEv4fG_l8BZApY3Mvprwr_OYRSi5ArJWwsLQA9vWuRVWZMCiDbMlFay/exec";
 
-function login(){
+async function login(){
 
     const usuario =
         document.getElementById("usuario").value;
@@ -9,71 +9,72 @@ function login(){
     const senha =
         document.getElementById("senha").value;
 
-    if(
-        usuario === "admin" &&
-        senha === "DoceCesta2026"
-    ){
+    try{
 
-        document.getElementById(
-            "loginBox"
-        ).style.display = "none";
+        const response =
+            await fetch(
+                API_URL,
+                {
+                    method:"POST",
+                    body:JSON.stringify({
+                        action:"login",
+                        login:usuario,
+                        senha:senha
+                    })
+                }
+            );
 
-        document.getElementById(
-            "adminArea"
-        ).style.display = "block";
+        const dados =
+            await response.json();
 
-        loadDashboard();
-        carregarPedidos();
-        carregarEntregas();
-        carregarProdutos();
-        loadFinanceiro();
-	carregarProducao();
-console.log("CHAMANDO AGENDA");	
-carregarAgenda();
-carregarTopProdutos();
+        console.log("LOGIN:", dados);
 
-    }else{
+        if(dados.success){
 
-        alert("Usuário ou senha inválidos");
+            localStorage.setItem(
+                "usuario",
+                dados.nome
+            );
 
-    }
+            localStorage.setItem(
+                "perfil",
+                dados.perfil
+            );
 
-}
+            document.getElementById(
+                "loginBox"
+            ).style.display = "none";
 
-async function carregarDashboard(){
+            document.getElementById(
+                "adminArea"
+            ).style.display = "block";
 
-    const response =
-        await fetch(
-            API_URL + "?action=dashboard"
+            loadDashboard();
+            carregarPedidos();
+            carregarEntregas();
+            carregarProdutos();
+            loadFinanceiro();
+            carregarProducao();
+            carregarAgenda();
+            carregarTopProdutos();
+
+        }else{
+
+            alert(
+                "Usuário ou senha inválidos"
+            );
+
+        }
+
+    }catch(err){
+
+        console.error(err);
+
+        alert(
+            "Erro ao conectar com servidor"
         );
 
-    const data =
-        await response.json();
-
-    document.getElementById(
-        "totalPedidos"
-    ).innerText =
-        data.totalPedidos || 0;
-
-    document.getElementById(
-        "recebidos"
-    ).innerText =
-        data.recebidos || 0;
-
-    document.getElementById(
-        "producao"
-    ).innerText =
-        data.producao || 0;
-
-    document.getElementById(
-        "entregues"
-    ).innerText =
-        data.entregues || 0;
-
-    document.getElementById(
-        "cancelados"
-    ).innerText =
-        data.cancelados || 0;
+    }
 
 }
 
