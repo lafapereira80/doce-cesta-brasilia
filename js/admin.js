@@ -52,6 +52,7 @@ carregarProducao();
 carregarAgenda();
 carregarTopProdutos();
 aplicarPermissoes();
+carregarUsuarios();
 
 }else{
 
@@ -1345,5 +1346,67 @@ btn.style.display = "none";
 }
 
 });
+
+}
+
+async function carregarUsuarios(){
+
+try{
+
+const response =
+await fetch(
+API_URL +
+"?action=listarUsuarios"
+);
+
+const usuarios =
+await response.json();
+
+const body =
+document.getElementById(
+"usuariosBody"
+);
+
+if(!body){
+return;
+}
+
+body.innerHTML = "";
+
+usuarios.forEach(usuario=>{
+
+body.innerHTML += `
+<tr>
+
+<td>${usuario.nome}</td>
+
+<td>${usuario.login}</td>
+
+<td>${usuario.perfil}</td>
+
+<td>
+
+<button
+onclick="excluirUsuario('${usuario.login}')">
+
+Excluir
+
+</button>
+
+</td>
+
+</tr>
+`;
+
+});
+
+}catch(erro){
+
+console.error(
+"ERRO CARREGAR USUARIOS",
+erro
+);
+
+}
 
 }
