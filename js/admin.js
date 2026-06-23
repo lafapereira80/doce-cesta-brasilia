@@ -51,6 +51,7 @@ loadFinanceiro();
 carregarProducao();
 carregarAgenda();
 carregarTopProdutos();
+aplicarPermissoes();
 
 }else{
 
