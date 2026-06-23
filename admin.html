@@ -235,6 +235,12 @@ onclick="abrirAba('producaoTab', this)">
 onclick="abrirAba('agendaTab', this)">
 📅 Agenda
 </button>
+<button
+id="btnUsuarios"
+class="tab-btn"
+onclick="abrirAba('usuariosTab', this)">
+👥 Usuários
+</button>
 </div>
 	<div id="dashboardTab"
 class="tab-content active">
@@ -526,6 +532,75 @@ class="tab-content">
 <div id="kanbanEntregue"></div>
 
 </div>
+
+</div>
+
+</div>
+
+	<div id="usuariosTab"
+class="tab-content">
+
+<h2>👥 Usuários</h2>
+
+<div class="table-container">
+
+<h3>Novo Usuário</h3>
+
+<input
+type="text"
+id="novoNomeUsuario"
+placeholder="Nome">
+
+<input
+type="text"
+id="novoLoginUsuario"
+placeholder="Login">
+
+<input
+type="password"
+id="novaSenhaUsuario"
+placeholder="Senha">
+
+<select id="novoPerfilUsuario">
+
+<option value="ADMIN">
+ADMIN
+</option>
+
+<option value="GERENTE">
+GERENTE
+</option>
+
+<option value="OPERADOR">
+OPERADOR
+</option>
+
+</select>
+
+<button onclick="cadastrarUsuario()">
+Cadastrar
+</button>
+
+<br><br>
+
+<table>
+
+<thead>
+
+<tr>
+<th>Nome</th>
+<th>Login</th>
+<th>Perfil</th>
+<th>Ações</th>
+</tr>
+
+</thead>
+
+<tbody id="usuariosBody">
+
+</tbody>
+
+</table>
 
 </div>
 
