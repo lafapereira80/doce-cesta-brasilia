@@ -32,7 +32,7 @@ await response.json();
 console.log("DADOS LOGIN:", dados);
 
 if(dados.success){
-
+window.usuarioLogado = dados;
 document.getElementById(
 "loginBox"
 ).style.display = "none";
