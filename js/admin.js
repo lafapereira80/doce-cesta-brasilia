@@ -1314,3 +1314,34 @@ document.getElementById(
 console.log("HISTORICO CARREGADO");
 
 }
+function aplicarPermissoes(){
+
+if(!window.usuarioLogado){
+return;
+}
+
+if(window.usuarioLogado.perfil === "ADMIN"){
+return;
+}
+
+const abas =
+document.querySelectorAll(".tab-btn");
+
+abas.forEach(btn => {
+
+const texto =
+btn.innerText;
+
+if(
+texto.includes("Dashboard") ||
+texto.includes("Produtos") ||
+texto.includes("Financeiro")
+){
+
+btn.style.display = "none";
+
+}
+
+});
+
+}
