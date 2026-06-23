@@ -1288,33 +1288,31 @@ tbody.appendChild(tr);
 
 async function carregarHistoricoCliente(nome){
 
+console.log("INICIANDO HISTORICO:", nome);
+
 const response =
 await fetch(
-
 API_URL +
-
 "?action=historicoCliente&nome=" +
-
 encodeURIComponent(nome)
-
 );
+
+console.log("FETCH OK");
 
 const dados =
 await response.json();
+
+console.log("DADOS:", dados);
 
 let produtosHtml = "";
 
 for(const produto in dados.produtos){
 
 produtosHtml += `
-
 <li>
-
 ${produto}
 (${dados.produtos[produto]}x)
-
 </li>
-
 `;
 
 }
@@ -1322,55 +1320,12 @@ ${produto}
 document.getElementById(
 "historicoCliente"
 ).innerHTML = `
-
-<p>
-
-📦 Total de Pedidos: <b>${dados.totalPedidos}</b>
-
-</p>
-
-<p>
-
-💰 Total Gasto: <b>
-
-${Number(
-dados.totalGasto
-).toLocaleString(
-'pt-BR',
-{
-style:'currency',
-currency:'BRL'
-}
-)}
-
-</b>
-
-</p>
-
-<p>
-
-🎯 Ticket Médio: <b>
-
-${Number(
-dados.ticketMedio
-).toLocaleString(
-'pt-BR',
-{
-style:'currency',
-currency:'BRL'
-}
-)}
-
-</b>
-
-</p>
-
-<ul>
-
-${produtosHtml}
-
-</ul>
-
+<p>📦 Total de Pedidos: <b>${dados.totalPedidos}</b></p>
+<p>💰 Total Gasto: <b>${dados.totalGasto}</b></p>
+<p>🎯 Ticket Médio: <b>${dados.ticketMedio}</b></p>
+<ul>${produtosHtml}</ul>
 `;
+
+console.log("HISTORICO CARREGADO");
 
 }
