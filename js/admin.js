@@ -257,8 +257,19 @@ function abrirPedido(row){
         .innerHTML = html;
 
 console.log("CLIENTE:", row[2]);
-carregarHistoricoCliente(row[2]);
 
+try {
+
+    carregarHistoricoCliente(row[2]);
+
+} catch(err) {
+
+    console.error(
+        "ERRO HISTORICO:",
+        err
+    );
+
+}
 
     document
         .getElementById("pedidoModal")
