@@ -253,29 +253,21 @@ console.log(row);
 
     `;
 
-    document
-        .getElementById("pedidoDetalhes")
-        .innerHTML = html;
+document
+.getElementById("pedidoDetalhes")
+.innerHTML = html;
+
+document
+.getElementById("pedidoModal")
+.style.display = "block";
 
 console.log("CLIENTE:", row[2]);
 
-try {
+setTimeout(() => {
 
-    carregarHistoricoCliente(row[2]);
+carregarHistoricoCliente(row[2]);
 
-} catch(err) {
-
-    console.error(
-        "ERRO HISTORICO:",
-        err
-    );
-
-}
-
-    document
-        .getElementById("pedidoModal")
-        .style.display = "block";
-
+}, 100);
 }
 
 function fecharModal(){
