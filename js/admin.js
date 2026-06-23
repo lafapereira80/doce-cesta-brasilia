@@ -211,7 +211,8 @@ l.innerText
 });
 
 function abrirPedido(row){
-
+console.log("ABRINDO PEDIDO");
+console.log(row);
     const html = `
 
     <p><b>Pedido:</b> ${row[0]}</p>
