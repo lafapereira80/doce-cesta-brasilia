@@ -1,80 +1,68 @@
 const API_URL =
 "https://script.google.com/macros/s/AKfycbyYZqOtzsls8pEv4fG_l8BZApY3Mvprwr_OYRSi5ArJWwsLQA9vWuRVWZMCiDbMlFay/exec";
-
 async function login(){
 
-    const usuario =
-        document.getElementById("usuario").value;
+console.log("INICIANDO LOGIN");
 
-    const senha =
-        document.getElementById("senha").value;
+const usuario =
+document.getElementById("usuario").value;
 
-    try{
+const senha =
+document.getElementById("senha").value;
 
-        const response =
-            await fetch(
-                API_URL,
-                {
-                    method:"POST",
-                    body:JSON.stringify({
-                        action:"login",
-                        login:usuario,
-                        senha:senha
-                    })
-                }
-            );
+console.log("USUARIO:", usuario);
 
-        const dados =
-            await response.json();
+try{
 
-        console.log("LOGIN:", dados);
+const response =
+await fetch(API_URL,{
+method:"POST",
+body:JSON.stringify({
+action:"login",
+login:usuario,
+senha:senha
+})
+});
 
-        if(dados.success){
+console.log("RESPOSTA RECEBIDA");
 
-            localStorage.setItem(
-                "usuario",
-                dados.nome
-            );
+const dados =
+await response.json();
 
-            localStorage.setItem(
-                "perfil",
-                dados.perfil
-            );
+console.log("DADOS LOGIN:", dados);
 
-            document.getElementById(
-                "loginBox"
-            ).style.display = "none";
+if(dados.success){
 
-            document.getElementById(
-                "adminArea"
-            ).style.display = "block";
+document.getElementById(
+"loginBox"
+).style.display = "none";
 
-            loadDashboard();
-            carregarPedidos();
-            carregarEntregas();
-            carregarProdutos();
-            loadFinanceiro();
-            carregarProducao();
-            carregarAgenda();
-            carregarTopProdutos();
+document.getElementById(
+"adminArea"
+).style.display = "block";
 
-        }else{
+loadDashboard();
+carregarPedidos();
+carregarEntregas();
+carregarProdutos();
+loadFinanceiro();
+carregarProducao();
+carregarAgenda();
+carregarTopProdutos();
 
-            alert(
-                "Usuário ou senha inválidos"
-            );
+}else{
 
-        }
+alert("Usuário ou senha inválidos");
 
-    }catch(err){
+}
 
-        console.error(err);
+}catch(erro){
 
-        alert(
-            "Erro ao conectar com servidor"
-        );
+console.error("ERRO LOGIN:", erro);
 
-    }
+alert("Erro no login");
+
+}
 
 }
 
