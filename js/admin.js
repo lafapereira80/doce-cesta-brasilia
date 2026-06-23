@@ -1314,7 +1314,10 @@ document.getElementById(
 console.log("HISTORICO CARREGADO");
 
 }
+
 function aplicarPermissoes(){
+
+console.log("APLICANDO PERMISSOES");
 
 if(!window.usuarioLogado){
 return;
@@ -1329,8 +1332,7 @@ document.querySelectorAll(".tab-btn");
 
 abas.forEach(btn => {
 
-const texto =
-btn.innerText;
+const texto = btn.innerText;
 
 if(
 texto.includes("Dashboard") ||
