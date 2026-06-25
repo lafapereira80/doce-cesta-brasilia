@@ -1,6 +1,7 @@
 const API_URL =
 "https://script.google.com/macros/s/AKfycbyYZqOtzsls8pEv4fG_l8BZApY3Mvprwr_OYRSi5ArJWwsLQA9vWuRVWZMCiDbMlFay/exec";
 
+let cestas = [];
 let priceTable = {};
 let produtosSistema = [];
 let selectedPhotos = [];
@@ -631,4 +632,96 @@ document
     );
 
 });updateSummary();
+}
+
+async function carregarCestas(){
+
+try{
+
+const response =
+await fetch(
+API_URL + "?action=listarCestas"
+);
+
+cestas =
+await response.json();
+
+const select =
+document.getElementById("nomeCesta");
+
+select.innerHTML = "";
+
+cestas.forEach(cesta=>{
+
+select.innerHTML += `
+<option value="${cesta.nome}">
+${cesta.nome}
+</option>
+`;
+
+});
+
+if(cestas.length > 0){
+
+atualizarItensCesta();
+
+}
+
+}catch(erro){
+
+console.error(
+"Erro ao carregar cestas:",
+erro
+);
+
+}
+
+}
+
+function atualizarItensCesta(){
+
+const nome =
+document.getElementById(
+"nomeCesta"
+).value;
+
+const cesta =
+cestas.find(c=>c.nome===nome);
+
+if(!cesta) return;
+
+const pao =
+document.getElementById("tipoPao");
+
+const espalhavel =
+document.getElementById("espalhavel");
+
+const bebida =
+document.getElementById("bebida");
+
+pao.innerHTML="";
+espalhavel.innerHTML="";
+bebida.innerHTML="";
+
+cesta.paes.forEach(item=>{
+
+pao.innerHTML +=
+`<option>${item}</option>`;
+
+});
+
+cesta.espalhaveis.forEach(item=>{
+
+espalhavel.innerHTML +=
+`<option>${item}</option>`;
+
+});
+
+cesta.bebidas.forEach(item=>{
+
+bebida.innerHTML +=
+`<option>${item}</option>`;
+
+});
+
 }
