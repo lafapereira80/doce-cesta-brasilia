@@ -35,6 +35,11 @@ if(dados.success){
     
 window.usuarioLogado = dados;
 
+localStorage.setItem(
+"usuarioLogado",
+JSON.stringify(dados)
+);
+    
 document.getElementById(
 "loginBox"
 ).style.display = "none";
@@ -53,6 +58,7 @@ carregarAgenda();
 carregarTopProdutos();
 aplicarPermissoes();
 carregarUsuarios();
+iniciarAtualizacaoAutomatica();
 
 }else{
 
@@ -1491,5 +1497,77 @@ erro
 alert("Erro ao excluir usuário");
 
 }
+
+}
+
+
+let atualizacaoAutomatica = null;
+
+function iniciarAtualizacaoAutomatica(){
+
+if(atualizacaoAutomatica){
+return;
+}
+
+atualizacaoAutomatica =
+setInterval(() => {
+
+loadDashboard();
+carregarPedidos();
+carregarEntregas();
+loadFinanceiro();
+carregarProducao();
+carregarAgenda();
+carregarTopProdutos();
+
+console.log("Atualização automática executada");
+
+}, 30000);
+
+}
+
+window.onload = function(){
+
+const usuarioSalvo =
+localStorage.getItem("usuarioLogado");
+
+if(usuarioSalvo){
+
+window.usuarioLogado =
+JSON.parse(usuarioSalvo);
+
+document.getElementById(
+"loginBox"
+).style.display = "none";
+
+document.getElementById(
+"adminArea"
+).style.display = "block";
+
+loadDashboard();
+carregarPedidos();
+carregarEntregas();
+carregarProdutos();
+loadFinanceiro();
+carregarProducao();
+carregarAgenda();
+carregarTopProdutos();
+carregarUsuarios();
+
+aplicarPermissoes();
+
+iniciarAtualizacaoAutomatica();
+
+}
+
+};
+
+function logout(){
+
+localStorage.removeItem(
+"usuarioLogado"
+);
+
+location.reload();
 
 }
