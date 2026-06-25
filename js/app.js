@@ -699,11 +699,14 @@ document.getElementById("espalhavel");
 
 const bebida =
 document.getElementById("bebida");
-
+const adicionais =
+document.getElementById(
+"adicionaisContainer"
+);
 pao.innerHTML="";
 espalhavel.innerHTML="";
 bebida.innerHTML="";
-
+adicionais.innerHTML="";
 cesta.paes.forEach(item=>{
 
 pao.innerHTML +=
@@ -726,3 +729,22 @@ bebida.innerHTML +=
 });
 
 }
+cesta.adicionais.forEach(item=>{
+
+adicionais.innerHTML += `
+
+<label style="display:block;margin:6px 0;">
+
+<input
+type="checkbox"
+name="adicionais"
+value="${item}"
+onchange="togglePolaroidUpload()">
+
+${item}
+
+</label>
+
+`;
+
+});
