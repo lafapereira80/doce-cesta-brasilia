@@ -178,7 +178,13 @@ async function alterarStatus(
         }
     );
 
-    carregarDashboard();
+ loadDashboard();
+carregarPedidos();
+carregarEntregas();
+loadFinanceiro();
+carregarProducao();
+carregarAgenda();
+carregarTopProdutos();
 
     alert(
         "Status atualizado!"
@@ -1526,7 +1532,7 @@ carregarTopProdutos();
 
 console.log("Atualização automática executada");
 
-}, 30000);
+}, 10000);
 
 }
 
