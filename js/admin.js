@@ -116,7 +116,7 @@ onclick='abrirPedido(${JSON.stringify(row)})'>
 ${row[2]}
 </a>
 </td>
-            <td>${row[3]}</td>
+            <td>${row[4]}</td>
             <td>${row[10]}</td>
             <td>${row[14]}</td>
             <td>${fotos}</td>
@@ -226,39 +226,41 @@ console.log(row);
 
     <p><b>Pedido:</b> ${row[0]}</p>
 
-    <p><b>Cliente:</b> ${row[2]}</p>
+<p><b>Cliente:</b> ${row[2]}</p>
 
-    <p><b>Telefone:</b> ${row[3]}</p>
+<p><b>CPF:</b> ${row[3]}</p>
 
-    <p><b>Cesta:</b> ${row[4]}</p>
+<p><b>Telefone:</b> ${row[4]}</p>
 
-    <p><b>Pão:</b> ${row[5]}</p>
+<p><b>Cesta:</b> ${row[5]}</p>
 
-    <p><b>Espalhável:</b> ${row[6]}</p>
+<p><b>Pão:</b> ${row[6]}</p>
 
-    <p><b>Bebida:</b> ${row[7]}</p>
+<p><b>Espalhável:</b> ${row[7]}</p>
 
-    <p><b>Adicionais:</b> ${row[8]}</p>
+<p><b>Bebida:</b> ${row[8]}</p>
 
-    <p><b>Mensagem:</b><br>${row[9]}</p>
+<p><b>Adicionais:</b> ${row[9]}</p>
 
-    <p><b>Data Entrega:</b> ${row[10]}</p>
+<p><b>Mensagem:</b><br>${row[10]}</p>
 
-    <p><b>Hora Entrega:</b> ${row[11]}</p>
+<p><b>Data Entrega:</b> ${row[11]}</p>
 
-    <p><b>Endereço:</b><br>${row[12]}</p>
+<p><b>Hora Entrega:</b> ${row[12]}</p>
 
-    <p><b>Pagamento:</b> ${row[13]}</p>
+<p><b>Endereço:</b><br>${row[13]}</p>
 
-    <p><b>Status:</b> ${row[14]}</p>
+<p><b>Pagamento:</b> ${row[14]}</p>
 
-    <p>
-        <b>Fotos:</b><br>
-        <a href="${row[15]}"
-        target="_blank">
-        Abrir Fotos
-        </a>
-    </p>
+<p><b>Status:</b> ${row[15]}</p>
+
+<p>
+    <b>Fotos:</b><br>
+    <a href="${row[16]}"
+    target="_blank">
+    Abrir Fotos
+    </a>
+</p>
 
     `;
 
