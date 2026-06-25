@@ -274,7 +274,7 @@ console.log("CLIENTE:", row[2]);
 
 setTimeout(() => {
 
-carregarHistoricoCliente(row[2]);
+carregarHistoricoCliente(row[3]);
 
 }, 100);
 }
@@ -1288,15 +1288,15 @@ tbody.appendChild(tr);
 
 }
 
-async function carregarHistoricoCliente(nome){
+async function carregarHistoricoCliente(cpf){
 
-console.log("INICIANDO HISTORICO:", nome);
+console.log("INICIANDO HISTORICO:", cpf);
 
 const response =
 await fetch(
 API_URL +
-"?action=historicoCliente&nome=" +
-encodeURIComponent(nome)
+"?action=historicoCliente&cpf=" +
+encodeURIComponent(cpf)
 );
 
 console.log("FETCH OK");
@@ -1312,8 +1312,7 @@ for(const produto in dados.produtos){
 
 produtosHtml += `
 <li>
-${produto}
-(${dados.produtos[produto]}x)
+${produto} (${dados.produtos[produto]}x)
 </li>
 `;
 
@@ -1331,7 +1330,6 @@ document.getElementById(
 console.log("HISTORICO CARREGADO");
 
 }
-
 function aplicarPermissoes(){
 
 console.log("APLICANDO PERMISSOES");
