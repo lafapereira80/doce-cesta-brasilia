@@ -1406,15 +1406,15 @@ body.innerHTML += `
 
 <td>
 
-<button
-onclick="excluirUsuario('${usuario.login}')">
-
+${
+usuario.login === "admin"
+? "🔒 Protegido"
+: `<button onclick="excluirUsuario('${usuario.login}')">
 Excluir
-
-</button>
+</button>`
+}
 
 </td>
-
 </tr>
 `;
 
