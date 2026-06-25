@@ -13,9 +13,11 @@ CARREGAMENTO INICIAL
 ==========================
 */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
 setupPolaroidUpload();
+
+await carregarCestas();
 
 carregarProdutosFormulario();
 
@@ -24,7 +26,6 @@ loadPrices();
 bindEvents();
 
 });
-
 
 
 /*
