@@ -997,12 +997,12 @@ async function carregarAgenda(){
 
     dados.slice(1).forEach(row=>{
 
-        if(!row[10]) return;
+        if(!row[11]) return;
 
-        const dataPedido =
-            new Date(row[10])
-            .toISOString()
-            .split("T")[0];
+const dataPedido =
+    new Date(row[11])
+    .toISOString()
+    .split("T")[0];
 
         if(dataPedido === hojeStr){
 
@@ -1012,18 +1012,11 @@ async function carregarAgenda(){
                 document.createElement("tr");
 
 const hora =
-new Date(row[11])
-.toLocaleTimeString(
-'pt-BR',
-{
-hour:'2-digit',
-minute:'2-digit'
-}
-);
-
+String(row[12]).substring(0,5);
+            
 const endereco =
-row[12] || "";
-
+row[13] || "";
+            
 let regiao = "Brasília";
 
 if(endereco.includes("Asa Sul"))
@@ -1048,11 +1041,10 @@ regiao = "Sudoeste";
 
 <td>${hora}</td>
 <td>${row[2]}</td>
-<td>${row[4]}</td>
+<td>${row[5]}</td>
 <td>${regiao}</td>
-<td>${row[12]}</td>
-<td>${row[14]}</td>
-
+<td>${row[13]}</td>
+<td>${row[15]}</td>
 `;
 
             tbody.appendChild(tr);
