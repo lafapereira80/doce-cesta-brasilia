@@ -358,7 +358,11 @@ const payload = {
     document.getElementById(
       "nomeCliente"
     ).value,
-
+cpf:
+document.getElementById(
+"cpf"
+).value,
+  
   telefone:
     document.getElementById(
       "telefone"
