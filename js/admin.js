@@ -54,7 +54,6 @@ document.getElementById(
 
 loadDashboard();
 carregarPedidos();
-carregarEntregas();
 carregarProdutos();
 loadFinanceiro();
 carregarProducao();
@@ -766,11 +765,11 @@ dados.slice(1).forEach(row=>{
 console.log(
 "STATUS:",
 row[0],
-row[14]
+row[15]
 );
 
-const status = row[14];
-
+const status = row[15];
+    
 const card = document.createElement("div");
 
 card.className =
@@ -780,18 +779,15 @@ card.innerHTML = `
 
 <h4>${row[2]}</h4>
 
-<p>
-Pedido:
-${row[0]}
-</p>
+<p><b>Pedido:</b> ${row[0]}</p>
 
-<p>
-📅 ${row[10]}
-</p>
+<p><b>Cesta:</b> ${row[5]}</p>
 
-<p>
-⏰ ${row[11]}
-</p>
+<p><b>Telefone:</b> ${row[4]}</p>
+
+<p>📅 ${row[11]}</p>
+
+<p>⏰ ${row[12]}</p>
 
 <button
 onclick="
@@ -803,7 +799,6 @@ Avançar
 </button>
 
 `;
-
 if(status==="Recebido"){
 
 document
