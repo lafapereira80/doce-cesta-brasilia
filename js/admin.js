@@ -1375,6 +1375,26 @@ body.innerHTML = "";
 
 usuarios.forEach(usuario=>{
 
+if(usuario.login === "admin"){
+
+body.innerHTML += `
+<tr>
+
+<td>${usuario.nome}</td>
+
+<td>${usuario.login}</td>
+
+<td>${usuario.perfil}</td>
+
+<td>
+🔒 Protegido
+</td>
+
+</tr>
+`;
+
+}else{
+
 body.innerHTML += `
 <tr>
 
@@ -1398,8 +1418,10 @@ Excluir
 </tr>
 `;
 
-});
+}
 
+});
+    
 }catch(erro){
 
 console.error(
