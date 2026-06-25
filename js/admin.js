@@ -34,7 +34,11 @@ console.log("DADOS LOGIN:", dados);
 if(dados.success){
     
 window.usuarioLogado = dados;
-
+document.getElementById(
+"usuarioInfo"
+).innerText =
+`${dados.nome} (${dados.perfil})`;
+    
 localStorage.setItem(
 "usuarioLogado",
 JSON.stringify(dados)
@@ -1536,6 +1540,11 @@ if(usuarioSalvo){
 window.usuarioLogado =
 JSON.parse(usuarioSalvo);
 
+document.getElementById(
+"usuarioInfo"
+).innerText =
+`${window.usuarioLogado.nome} (${window.usuarioLogado.perfil})`;
+    
 document.getElementById(
 "loginBox"
 ).style.display = "none";
