@@ -1432,3 +1432,64 @@ erro
 }
 
 }
+
+async function excluirUsuario(login){
+
+if(login === "admin"){
+
+alert("O usuário administrador não pode ser excluído.");
+
+return;
+
+}
+
+if(!confirm("Deseja realmente excluir este usuário?")){
+
+return;
+
+}
+
+try{
+
+const response =
+await fetch(
+API_URL,
+{
+method:"POST",
+body:JSON.stringify({
+action:"excluirUsuario",
+login:login
+})
+}
+);
+
+const dados =
+await response.json();
+
+if(dados.success){
+
+alert("Usuário excluído com sucesso!");
+
+carregarUsuarios();
+
+}else{
+
+alert(
+dados.error ||
+"Erro ao excluir usuário"
+);
+
+}
+
+}catch(erro){
+
+console.error(
+"ERRO EXCLUIR USUARIO:",
+erro
+);
+
+alert("Erro ao excluir usuário");
+
+}
+
+}
