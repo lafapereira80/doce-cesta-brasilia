@@ -977,34 +977,31 @@ loadDashboard();
 async function carregarAgenda(){
 
     const response =
-        await fetch(
-            API_URL + "?action=orders"
-        );
+        await fetch(API_URL + "?action=orders");
 
     const dados =
         await response.json();
 
     const tbody =
-        document.getElementById(
-            "agendaBody"
-        );
+        document.getElementById("agendaBody");
 
     tbody.innerHTML = "";
 
-    const hoje =
-        new Date();
-const hojeStr =
-    hoje.toISOString().split("T")[0];
+    const hoje = new Date();
+
+    const hojeStr =
+        hoje.toISOString().split("T")[0];
+
     let encontrados = 0;
 
     dados.slice(1).forEach(row=>{
 
         if(!row[11]) return;
 
-const dataPedido =
-    new Date(row[11])
-    .toISOString()
-    .split("T")[0];
+        const dataPedido =
+            new Date(row[11])
+            .toISOString()
+            .split("T")[0];
 
         if(dataPedido === hojeStr){
 
@@ -1013,41 +1010,35 @@ const dataPedido =
             const tr =
                 document.createElement("tr");
 
-const hora =
-String(row[12]).substring(0,5);
-            
-const endereco =
-row[13] || "";
-            
-let regiao = "Brasília";
+            const hora =
+                String(row[12]).substring(0,5);
 
-if(endereco.includes("Asa Sul"))
-regiao = "Asa Sul";
+            const endereco =
+                row[13] || "";
 
-else if(endereco.includes("Asa Norte"))
-regiao = "Asa Norte";
+            let regiao = "Brasília";
 
-else if(endereco.includes("Guará"))
-regiao = "Guará";
+            if(endereco.includes("Asa Sul"))
+                regiao = "Asa Sul";
+            else if(endereco.includes("Asa Norte"))
+                regiao = "Asa Norte";
+            else if(endereco.includes("Guará"))
+                regiao = "Guará";
+            else if(endereco.includes("Águas Claras"))
+                regiao = "Águas Claras";
+            else if(endereco.includes("Taguatinga"))
+                regiao = "Taguatinga";
+            else if(endereco.includes("Sudoeste"))
+                regiao = "Sudoeste";
 
-else if(endereco.includes("Águas Claras"))
-regiao = "Águas Claras";
-
-else if(endereco.includes("Taguatinga"))
-regiao = "Taguatinga";
-
-else if(endereco.includes("Sudoeste"))
-regiao = "Sudoeste";
-
- tr.innerHTML = `
-
-<td>${hora}</td>
-<td>${row[2]}</td>
-<td>${row[5]}</td>
-<td>${regiao}</td>
-<td>${row[13]}</td>
-<td>${row[15]}</td>
-`;
+            tr.innerHTML = `
+                <td>${hora}</td>
+                <td>${row[2]}</td>
+                <td>${row[5]}</td>
+                <td>${regiao}</td>
+                <td>${row[13]}</td>
+                <td>${row[15]}</td>
+            `;
 
             tbody.appendChild(tr);
 
@@ -1055,13 +1046,9 @@ regiao = "Sudoeste";
 
     });
 
-    console.log(
-        "PEDIDOS DE HOJE:",
-        encontrados
-    );
+    console.log("PEDIDOS DE HOJE:", encontrados);
 
 }
-
 function adicionarGrupoAgenda(
     tbody,
     titulo,
