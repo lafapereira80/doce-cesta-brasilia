@@ -628,16 +628,13 @@ erro
 }
 
 }
-
 function atualizarItensCesta(){
 
 const nome =
-document.getElementById(
-"nomeCesta"
-).value;
+document.getElementById("nomeCesta").value;
 
 const cesta =
-cestas.find(c=>c.nome===nome);
+cestas.find(c => c.nome === nome);
 
 if(!cesta) return;
 
@@ -649,56 +646,58 @@ document.getElementById("espalhavel");
 
 const bebida =
 document.getElementById("bebida");
+
 const adicionais =
-document.getElementById(
-"adicionaisContainer"
-);
-pao.innerHTML="";
-espalhavel.innerHTML="";
-bebida.innerHTML="";
-adicionais.innerHTML="";
-cesta.paes.forEach(item=>{
+document.getElementById("adicionaisContainer");
+
+pao.innerHTML = "";
+espalhavel.innerHTML = "";
+bebida.innerHTML = "";
+adicionais.innerHTML = "";
+
+// Pães
+cesta.paes.forEach(item => {
 
 pao.innerHTML +=
-`<option>${item}</option>`;
+`<option value="${item}">${item}</option>`;
 
 });
 
-cesta.espalhaveis.forEach(item=>{
+// Espalháveis
+cesta.espalhaveis.forEach(item => {
 
 espalhavel.innerHTML +=
-`<option>${item}</option>`;
+`<option value="${item}">${item}</option>`;
 
 });
 
-cesta.bebidas.forEach(item=>{
+// Bebidas
+cesta.bebidas.forEach(item => {
 
 bebida.innerHTML +=
-`<option>${item}</option>`;
+`<option value="${item}">${item}</option>`;
 
 });
 
-}
-cesta.adicionais.forEach(item=>{
+// Adicionais
+cesta.adicionais.forEach(item => {
 
 adicionais.innerHTML += `
-
 <label style="display:block;margin:6px 0;">
 
 <input
 type="checkbox"
 name="adicionais"
 value="${item}"
-onchange="togglePolaroidUpload()">
+onchange="updateSummary();togglePolaroidUpload();">
 
 ${item}
 
 </label>
-
 `;
 
 });
 
-
 updateSummary();
+
 }
