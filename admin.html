@@ -672,5 +672,45 @@ Carregando...
 
 <script src="js/admin.js"></script>
 
+<div id="modalCesta" class="modal" style="display:none;">
+
+    <div class="modal-content">
+
+        <h2 id="tituloModalCesta">
+            Nova Cesta
+        </h2>
+
+        <label>Nome</label>
+        <input type="text" id="cestaNome">
+
+        <label>Preço</label>
+        <input type="number" id="cestaPreco">
+
+        <h3>Pães</h3>
+        <div id="modalPaes"></div>
+
+        <h3>Espalháveis</h3>
+        <div id="modalEspalhaveis"></div>
+
+        <h3>Bebidas</h3>
+        <div id="modalBebidas"></div>
+
+        <h3>Adicionais</h3>
+        <div id="modalAdicionais"></div>
+
+        <br>
+
+        <button onclick="salvarCesta()">
+            💾 Salvar
+        </button>
+
+        <button onclick="fecharModalCesta()">
+            Cancelar
+        </button>
+
+    </div>
+
+</div>
+	
 </body>
 </html>
