@@ -1602,3 +1602,84 @@ alert(
 );
 
 }
+
+function novaCesta(){
+
+document.getElementById("modalCesta").style.display = "flex";
+
+document.getElementById("tituloModalCesta").innerText =
+"Nova Cesta";
+
+document.getElementById("cestaNome").value = "";
+document.getElementById("cestaPreco").value = "";
+
+document.querySelectorAll("#modalCesta input[type=checkbox]")
+.forEach(c => c.checked = false);
+
+}
+
+function fecharModalCesta(){
+
+document.getElementById("modalCesta").style.display = "none";
+
+}
+
+async function salvarCesta(){
+
+const nome =
+document.getElementById("cestaNome").value;
+
+const preco =
+Number(
+document.getElementById("cestaPreco").value
+);
+
+const paes =
+Array.from(
+document.querySelectorAll(".ckPao:checked")
+).map(c=>c.value);
+
+const espalhaveis =
+Array.from(
+document.querySelectorAll(".ckEspalhavel:checked")
+).map(c=>c.value);
+
+const bebidas =
+Array.from(
+document.querySelectorAll(".ckBebida:checked")
+).map(c=>c.value);
+
+const adicionais =
+Array.from(
+document.querySelectorAll(".ckAdicional:checked")
+).map(c=>c.value);
+
+await fetch(API_URL,{
+
+method:"POST",
+
+body:JSON.stringify({
+
+action:"salvarCesta",
+
+nome,
+
+preco,
+
+paes,
+
+espalhaveis,
+
+bebidas,
+
+adicionais
+
+})
+
+});
+
+fecharModalCesta();
+
+carregarCestasAdmin();
+
+}
