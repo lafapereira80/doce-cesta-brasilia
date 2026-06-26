@@ -514,63 +514,15 @@ async function carregarProdutosFormulario(){
         await response.json();
 produtosSistema = produtos;
 
-    const cesta =
-        document.getElementById("nomeCesta");
-
-    const pao =
-        document.getElementById("tipoPao");
-
-    const espalhavel =
-        document.getElementById("espalhavel");
-
-    const bebida =
-        document.getElementById("bebida");
-
-    const adicionais =
-        document.getElementById(
-            "adicionaisContainer"
-        );
-
-    cesta.innerHTML = "";
-    pao.innerHTML = "";
-    espalhavel.innerHTML = "";
-    bebida.innerHTML = "";
-    adicionais.innerHTML = "";
-
+    
     produtos.forEach(item=>{
 
         if(item.ativo !== "SIM"){
             return;
         }
 
-        if(item.categoria === "Cesta"){
-
-            cesta.innerHTML +=
-            `<option>${item.produto}</option>`;
-
-        }
-
-        if(item.categoria === "Pão"){
-
-            pao.innerHTML +=
-            `<option>${item.produto}</option>`;
-
-        }
-
-        if(item.categoria === "Espalhável"){
-
-            espalhavel.innerHTML +=
-            `<option>${item.produto}</option>`;
-
-        }
-
-        if(item.categoria === "Bebida"){
-
-            bebida.innerHTML +=
-            `<option>${item.produto}</option>`;
-
-        }
-
+        
+   
        if(item.categoria === "Adicional"){
 
     const idPolaroid =
@@ -749,7 +701,7 @@ ${item}
 
 
 const preco =
-Number(cesta.preco || 0);
+Number(cestaSelecionada.preco || 0);
 
 totalProdutos = preco;
 
