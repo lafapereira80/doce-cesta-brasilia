@@ -179,7 +179,6 @@ async function alterarStatus(
 
  loadDashboard();
 carregarPedidos();
-carregarEntregas();
 loadFinanceiro();
 carregarProducao();
 carregarAgenda();
