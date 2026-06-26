@@ -617,30 +617,29 @@ onclick="novaCesta()">
 </tbody>
 
 </table>
+<hr>
 
-</div>
+<div
+id="editorCesta"
+style="display:none;margin-top:20px;">
 
-<!-- Modal Cadastro de Cestas -->
-
-<div id="modalCesta" class="modal" style="display:none;">
-
-<div class="modal-content">
-
-<h2 id="tituloModalCesta">
+<h2 id="tituloEditor">
 Nova Cesta
 </h2>
 
-<label>Nome</label>
+<label>Nome da Cesta</label>
 
 <input
 type="text"
-id="cestaNome">
+id="editNomeCesta">
+
+<br><br>
 
 <label>Preço</label>
 
 <input
 type="number"
-id="cestaPreco">
+id="editPrecoCesta">
 
 <hr>
 
@@ -666,20 +665,22 @@ id="cestaPreco">
 
 <div id="listaAdicionais"></div>
 
-<br>
+<br><br>
 
 <button onclick="salvarCesta()">
 💾 Salvar
 </button>
 
-<button onclick="fecharModalCesta()">
+<button onclick="cancelarEdicao()">
 Cancelar
 </button>
 
 </div>
-
 </div>
-	
+
+<!-- Modal Cadastro de Cestas -->
+
+
 <!-- MODAL DETALHES DO PEDIDO -->
 
 <div id="pedidoModal"
