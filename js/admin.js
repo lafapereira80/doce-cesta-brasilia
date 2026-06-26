@@ -1605,16 +1605,107 @@ alert(
 
 function novaCesta(){
 
-document.getElementById("modalCesta").style.display = "flex";
+document.getElementById("editorCesta").style.display =
+"block";
 
-document.getElementById("tituloModalCesta").innerText =
+document.getElementById("tituloEditor").innerText =
 "Nova Cesta";
 
-document.getElementById("cestaNome").value = "";
-document.getElementById("cestaPreco").value = "";
+document.getElementById("editNomeCesta").value = "";
 
-document.querySelectorAll("#modalCesta input[type=checkbox]")
-.forEach(c => c.checked = false);
+document.getElementById("editPrecoCesta").value = "";
+
+carregarProdutosEditor();
+
+}
+function cancelarEdicao(){
+
+document.getElementById("editorCesta").style.display =
+"none";
+
+}
+
+function carregarProdutosEditor(){
+
+const paes =
+document.getElementById("listaPaes");
+
+const espalhaveis =
+document.getElementById("listaEspalhaveis");
+
+const bebidas =
+document.getElementById("listaBebidas");
+
+const adicionais =
+document.getElementById("listaAdicionais");
+
+paes.innerHTML = "";
+espalhaveis.innerHTML = "";
+bebidas.innerHTML = "";
+adicionais.innerHTML = "";
+
+produtosSistema.forEach(produto=>{
+
+if(produto.ativo !== "SIM")
+return;
+
+if(produto.categoria === "Pão"){
+
+paes.innerHTML += `
+<label>
+<input
+type="checkbox"
+class="ckPao"
+value="${produto.produto}">
+${produto.produto}
+</label><br>
+`;
+
+}
+
+if(produto.categoria === "Espalhável"){
+
+espalhaveis.innerHTML += `
+<label>
+<input
+type="checkbox"
+class="ckEspalhavel"
+value="${produto.produto}">
+${produto.produto}
+</label><br>
+`;
+
+}
+
+if(produto.categoria === "Bebida"){
+
+bebidas.innerHTML += `
+<label>
+<input
+type="checkbox"
+class="ckBebida"
+value="${produto.produto}">
+${produto.produto}
+</label><br>
+`;
+
+}
+
+if(produto.categoria === "Adicional"){
+
+adicionais.innerHTML += `
+<label>
+<input
+type="checkbox"
+class="ckAdicional"
+value="${produto.produto}">
+${produto.produto}
+</label><br>
+`;
+
+}
+
+});
 
 }
 
