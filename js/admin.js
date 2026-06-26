@@ -625,9 +625,7 @@ function abrirAba(id, botao){
     .querySelectorAll('.tab-content')
     .forEach(tab=>{
 
-        tab.classList.remove(
-            'active'
-        );
+        tab.classList.remove('active');
 
     });
 
@@ -635,9 +633,7 @@ function abrirAba(id, botao){
     .querySelectorAll('.tab-btn')
     .forEach(btn=>{
 
-        btn.classList.remove(
-            'active'
-        );
+        btn.classList.remove('active');
 
     });
 
@@ -646,14 +642,14 @@ function abrirAba(id, botao){
     .classList.add('active');
 
     botao.classList.add('active');
-    if(tabId === "cestasTab"){
 
-carregarCestasAdmin();
+    if(id === "cestasTab"){
+
+        carregarCestasAdmin();
+
+    }
 
 }
-
-}
-
 
 async function loadDashboard() {
 
@@ -998,10 +994,8 @@ async function carregarAgenda(){
 
         if(!row[11]) return;
 
-        const dataPedido =
-            new Date(row[11])
-            .toISOString()
-            .split("T")[0];
+   const dataPedido =
+String(row[11]).substring(0,10);
 
         if(dataPedido === hojeStr){
 
