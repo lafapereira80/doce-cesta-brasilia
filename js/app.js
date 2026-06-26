@@ -178,30 +178,28 @@ function updateSummary() {
 
     let html = "";
 
-    const produtoCesta =
-        produtosSistema.find(
-            p =>
-                p.produto === cesta
-        );
+   const cestaSelecionada =
+cestas.find(
+c => c.nome === cesta
+);
 
-    if (produtoCesta) {
+if(cestaSelecionada){
 
-        total +=
-            Number(
-                produtoCesta.valor
-            );
+total +=
+Number(
+cestaSelecionada.preco
+);
 
-        html += `
-            <p>
-                ${produtoCesta.produto}
-                - R$ ${Number(
-                    produtoCesta.valor
-                ).toFixed(2)}
-            </p>
-        `;
+html += `
+<p>
+${cestaSelecionada.nome}
+- R$ ${Number(
+cestaSelecionada.preco
+).toFixed(2)}
+</p>
+`;
 
-    }
-
+}
     document
     .querySelectorAll(
         '#adicionaisContainer input[type="checkbox"]:checked'
@@ -748,3 +746,13 @@ ${item}
 `;
 
 });
+
+
+const preco =
+Number(cesta.preco || 0);
+
+totalProdutos = preco;
+
+updateSummary();
+
+}
