@@ -700,11 +700,5 @@ ${item}
 });
 
 
-const preco =
-Number(cestaSelecionada.preco || 0);
-
-totalProdutos = preco;
-
 updateSummary();
-
 }
