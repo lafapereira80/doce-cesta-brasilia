@@ -993,11 +993,8 @@ async function carregarAgenda(){
 
     const hoje =
         new Date();
-
-    const dataPedido =
-    new Date(row[11])
-    .toISOString()
-    .split("T")[0];
+const hojeStr =
+    hoje.toISOString().split("T")[0];
     let encontrados = 0;
 
     dados.slice(1).forEach(row=>{
@@ -1516,7 +1513,6 @@ setInterval(() => {
 
 loadDashboard();
 carregarPedidos();
-carregarEntregas();
 loadFinanceiro();
 carregarProducao();
 carregarAgenda();
@@ -1553,7 +1549,6 @@ document.getElementById(
 
 loadDashboard();
 carregarPedidos();
-carregarEntregas();
 carregarProdutos();
 loadFinanceiro();
 carregarProducao();
