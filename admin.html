@@ -620,6 +620,66 @@ onclick="novaCesta()">
 
 </div>
 
+<!-- Modal Cadastro de Cestas -->
+
+<div id="modalCesta" class="modal" style="display:none;">
+
+<div class="modal-content">
+
+<h2 id="tituloModalCesta">
+Nova Cesta
+</h2>
+
+<label>Nome</label>
+
+<input
+type="text"
+id="cestaNome">
+
+<label>Preço</label>
+
+<input
+type="number"
+id="cestaPreco">
+
+<hr>
+
+<h3>Pães</h3>
+
+<div id="listaPaes"></div>
+
+<hr>
+
+<h3>Espalháveis</h3>
+
+<div id="listaEspalhaveis"></div>
+
+<hr>
+
+<h3>Bebidas</h3>
+
+<div id="listaBebidas"></div>
+
+<hr>
+
+<h3>Adicionais</h3>
+
+<div id="listaAdicionais"></div>
+
+<br>
+
+<button onclick="salvarCesta()">
+💾 Salvar
+</button>
+
+<button onclick="fecharModalCesta()">
+Cancelar
+</button>
+
+</div>
+
+</div>
+	
 <!-- MODAL DETALHES DO PEDIDO -->
 
 <div id="pedidoModal"
@@ -711,6 +771,60 @@ Carregando...
     </div>
 
 </div>
-	
+
+<style>
+
+.modal{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+background:rgba(0,0,0,.5);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+z-index:9999;
+
+}
+
+.modal-content{
+
+background:#fff;
+
+padding:20px;
+
+border-radius:10px;
+
+width:700px;
+
+max-height:90vh;
+
+overflow:auto;
+
+}
+
+.modal-content label{
+
+font-weight:bold;
+
+display:block;
+
+margin-top:10px;
+
+}
+
+</style>
+
 </body>
 </html>
