@@ -647,6 +647,11 @@ function abrirAba(id, botao){
     .classList.add('active');
 
     botao.classList.add('active');
+    if(tabId === "cestasTab"){
+
+carregarCestasAdmin();
+
+}
 
 }
 
@@ -1572,5 +1577,64 @@ localStorage.removeItem(
 );
 
 location.reload();
+
+}
+async function carregarCestasAdmin(){
+
+try{
+
+const response =
+await fetch(
+API_URL + "?action=listarCestas"
+);
+
+const cestas =
+await response.json();
+
+const tbody =
+document.getElementById("listaCestas");
+
+tbody.innerHTML = "";
+
+cestas.forEach(cesta=>{
+
+tbody.innerHTML += `
+
+<tr>
+
+<td>${cesta.nome}</td>
+
+<td>
+R$ ${Number(cesta.preco).toFixed(2)}
+</td>
+
+<td>
+
+<button
+onclick="editarCesta('${cesta.nome}')">
+✏️ Editar
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+}catch(err){
+
+console.error(err);
+
+}
+
+}
+
+function editarCesta(nome){
+
+alert(
+"Editar cesta: " + nome
+);
 
 }
