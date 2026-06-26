@@ -218,6 +218,10 @@ margin-top:8px;
         onclick="abrirAba('pedidosTab', this)">
         📦 Pedidos
     </button>
+		<button class="tab-btn"
+onclick="abrirAba('cestasTab', this)">
+🧺 Cestas
+</button>
 		
 <button class="tab-btn"
 onclick="abrirAba('producaoTab', this)">
@@ -581,7 +585,41 @@ Cadastrar
 
 </div>
 
+
+	<div id="cestasTab" class="tab-content">
+
+<h2>Configuração de Cestas</h2>
+
+<button
+class="btn-primary"
+onclick="novaCesta()">
+➕ Nova Cesta
+</button>
+
+<table class="table">
+
+<thead>
+
+<tr>
+
+<th>Cesta</th>
+
+<th>Preço</th>
+
+<th>Ações</th>
+
+</tr>
+
+</thead>
+
+<tbody id="listaCestas">
+
+</tbody>
+
+</table>
+
 </div>
+		</div>
 <!-- MODAL DETALHES DO PEDIDO -->
 
 <div id="pedidoModal"
