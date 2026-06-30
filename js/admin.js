@@ -1,5 +1,8 @@
 const API_URL =
 "https://script.google.com/macros/s/AKfycbyYZqOtzsls8pEv4fG_l8BZApY3Mvprwr_OYRSi5ArJWwsLQA9vWuRVWZMCiDbMlFay/exec";
+
+let produtosSistema = [];
+
 async function login(){
 
 console.log("INICIANDO LOGIN");
@@ -52,6 +55,7 @@ document.getElementById(
 "adminArea"
 ).style.display = "block";
 
+await carregarProdutosSistema();
 loadDashboard();
 carregarPedidos();
 carregarProdutos();
@@ -1772,5 +1776,22 @@ adicionais
 fecharModalCesta();
 
 carregarCestasAdmin();
+
+}
+
+async function carregarProdutosSistema(){
+
+const response =
+await fetch(
+API_URL + "?action=products"
+);
+
+produtosSistema =
+await response.json();
+
+console.log(
+"Produtos carregados:",
+produtosSistema
+);
 
 }
