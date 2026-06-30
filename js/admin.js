@@ -1610,7 +1610,13 @@ document.getElementById("editNomeCesta").value = "";
 document.getElementById("editPrecoCesta").value = "";
 
 carregarProdutosEditor();
+console.log("Produtos:", produtosSistema.length);
 
+console.log(document.getElementById("listaPaes"));
+console.log(document.getElementById("listaEspalhaveis"));
+console.log(document.getElementById("listaBebidas"));
+console.log(document.getElementById("listaAdicionais"));
+    
 }
 function cancelarEdicao(){
 
