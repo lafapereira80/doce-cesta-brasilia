@@ -965,77 +965,63 @@ loadDashboard();
 
 async function carregarAgenda(){
 
-    const response =
-        await fetch(API_URL + "?action=orders");
+try{
 
-    const dados =
-        await response.json();
+const response =
+await fetch(
+API_URL + "?action=orders"
+);
 
-    const tbody =
-        document.getElementById("agendaBody");
+const dados =
+await response.json();
 
-    tbody.innerHTML = "";
+const tbody =
+document.getElementById("agendaBody");
 
-    const hoje = new Date();
+if(!tbody) return;
 
-    const hojeStr =
-        hoje.toISOString().split("T")[0];
+tbody.innerHTML="";
 
-    let encontrados = 0;
+const hoje =
+new Date();
 
-    dados.slice(1).forEach(row=>{
+const hojeStr =
+hoje.toISOString().split("T")[0];
 
-        if(!row[11]) return;
+dados.slice(1).forEach(row=>{
 
-   const dataPedido =
-String(row[11]).substring(0,10);
+if(!row[11]) return;
 
-        if(dataPedido === hojeStr){
+const dataEntrega =
+new Date(row[11])
+.toISOString()
+.split("T")[0];
 
-            encontrados++;
+if(dataEntrega!==hojeStr) return;
 
-            const tr =
-                document.createElement("tr");
+const tr =
+document.createElement("tr");
 
-            const hora =
-                String(row[12]).substring(0,5);
+tr.innerHTML=`
+<td>${String(row[12]).substring(0,5)}</td>
+<td>${row[2]}</td>
+<td>${row[5]}</td>
+<td>${row[13]}</td>
+<td>${row[15]}</td>
+`;
 
-            const endereco =
-                row[13] || "";
+tbody.appendChild(tr);
 
-            let regiao = "Brasília";
+});
 
-            if(endereco.includes("Asa Sul"))
-                regiao = "Asa Sul";
-            else if(endereco.includes("Asa Norte"))
-                regiao = "Asa Norte";
-            else if(endereco.includes("Guará"))
-                regiao = "Guará";
-            else if(endereco.includes("Águas Claras"))
-                regiao = "Águas Claras";
-            else if(endereco.includes("Taguatinga"))
-                regiao = "Taguatinga";
-            else if(endereco.includes("Sudoeste"))
-                regiao = "Sudoeste";
+}catch(e){
 
-            tr.innerHTML = `
-                <td>${hora}</td>
-                <td>${row[2]}</td>
-                <td>${row[5]}</td>
-                <td>${regiao}</td>
-                <td>${row[13]}</td>
-                <td>${row[15]}</td>
-            `;
-
-            tbody.appendChild(tr);
-
-        }
-
-    });
-
-    console.log("PEDIDOS DE HOJE:", encontrados);
+console.log("Agenda ignorada:",e);
 
 }
+
+}
+
 function adicionarGrupoAgenda(
     tbody,
     titulo,
@@ -1781,6 +1767,8 @@ carregarCestasAdmin();
 
 async function carregarProdutosSistema(){
 
+try{
+
 const response =
 await fetch(
 API_URL + "?action=products"
@@ -1789,9 +1777,13 @@ API_URL + "?action=products"
 produtosSistema =
 await response.json();
 
-console.log(
-"Produtos carregados:",
-produtosSistema
-);
+console.log("Produtos carregados:");
+console.log(produtosSistema);
+
+}catch(e){
+
+console.error("Erro carregando produtos:",e);
+
+}
 
 }
