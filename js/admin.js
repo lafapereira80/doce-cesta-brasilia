@@ -1711,6 +1711,12 @@ document.getElementById("modalCesta").style.display = "none";
 
 async function salvarCesta(){
 
+console.log("=================================");
+console.log("ENTREI EM salvarCesta()");
+console.log("=================================");
+
+try{
+
 const nome =
 document.getElementById("cestaNome").value;
 
@@ -1739,7 +1745,16 @@ Array.from(
 document.querySelectorAll(".ckAdicional:checked")
 ).map(c=>c.value);
 
-await fetch(API_URL,{
+console.log("NOME:", nome);
+console.log("PREÇO:", preco);
+console.log("PÃES:", paes);
+console.log("ESPALHÁVEIS:", espalhaveis);
+console.log("BEBIDAS:", bebidas);
+console.log("ADICIONAIS:", adicionais);
+
+console.log("ENVIANDO PARA API...");
+
+const response = await fetch(API_URL,{
 
 method:"POST",
 
@@ -1763,6 +1778,32 @@ adicionais
 
 });
 
+console.log("FETCH EXECUTADO");
+
+console.log(response);
+
+const dados =
+await response.json();
+
+console.log("RESPOSTA DA API:");
+
+console.log(dados);
+
+fecharModalCesta();
+
+carregarCestasAdmin();
+
+}catch(e){
+
+console.error("ERRO EM salvarCesta");
+
+console.error(e);
+
+alert(e);
+
+}
+
+}
 fecharModalCesta();
 
 carregarCestasAdmin();
