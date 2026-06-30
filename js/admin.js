@@ -1484,7 +1484,7 @@ console.log("Atualização automática executada");
 
 }
 
-window.onload = function(){
+window.onload = async function(){
 
 const usuarioSalvo =
 localStorage.getItem("usuarioLogado");
@@ -1498,7 +1498,7 @@ document.getElementById(
 "usuarioInfo"
 ).innerText =
 `${window.usuarioLogado.nome} (${window.usuarioLogado.perfil})`;
-    
+
 document.getElementById(
 "loginBox"
 ).style.display = "none";
@@ -1507,6 +1507,10 @@ document.getElementById(
 "adminArea"
 ).style.display = "block";
 
+// CARREGA TODOS OS PRODUTOS PRIMEIRO
+await carregarProdutosSistema();
+
+// DEPOIS CARREGA O RESTANTE
 loadDashboard();
 carregarPedidos();
 carregarProdutos();
