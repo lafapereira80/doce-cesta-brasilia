@@ -1767,6 +1767,8 @@ carregarCestasAdmin();
 
 async function carregarProdutosSistema(){
 
+console.log("ENTREI EM carregarProdutosSistema");
+
 try{
 
 const response =
@@ -1774,15 +1776,18 @@ await fetch(
 API_URL + "?action=products"
 );
 
-produtosSistema =
+console.log("RESPOSTA:", response);
+
+const dados =
 await response.json();
 
-console.log("Produtos carregados:");
-console.log(produtosSistema);
+console.log("DADOS:", dados);
+
+produtosSistema = dados;
 
 }catch(e){
 
-console.error("Erro carregando produtos:",e);
+console.error("ERRO carregarProdutosSistema:", e);
 
 }
 
