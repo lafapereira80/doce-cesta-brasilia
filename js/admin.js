@@ -1804,11 +1804,6 @@ alert(e);
 }
 
 }
-fecharModalCesta();
-
-carregarCestasAdmin();
-
-}
 
 async function carregarProdutosSistema(){
 
