@@ -1703,10 +1703,8 @@ ${produto.produto}
 
 }
 
-function fecharModalCesta(){
-
-document.getElementById("modalCesta").style.display = "none";
-
+function fecharEditorCesta(){
+  document.getElementById("editorCesta").style.display = "none";
 }
 
 async function salvarCesta(){
@@ -1717,12 +1715,13 @@ console.log("=================================");
 
 try{
 
+// 🔥 CORREÇÃO PRINCIPAL AQUI
 const nome =
-document.getElementById("cestaNome").value;
+document.getElementById("editNomeCesta").value;
 
 const preco =
 Number(
-document.getElementById("cestaPreco").value
+document.getElementById("editPrecoCesta").value
 );
 
 const paes =
@@ -1763,15 +1762,10 @@ body:JSON.stringify({
 action:"salvarCesta",
 
 nome,
-
 preco,
-
 paes,
-
 espalhaveis,
-
 bebidas,
-
 adicionais
 
 })
@@ -1780,31 +1774,22 @@ adicionais
 
 console.log("FETCH EXECUTADO");
 
-console.log(response);
+const dados = await response.json();
 
-const dados =
-await response.json();
+console.log("RESPOSTA DA API:", dados);
 
-console.log("RESPOSTA DA API:");
-
-console.log(dados);
-
-fecharModalCesta();
-
+// fechar e atualizar
+fecharEditorCesta();
 carregarCestasAdmin();
 
 }catch(e){
 
-console.error("ERRO EM salvarCesta");
-
-console.error(e);
-
+console.error("ERRO EM salvarCesta", e);
 alert(e);
 
 }
 
 }
-
 async function carregarProdutosSistema(){
 
 console.log("ENTREI EM carregarProdutosSistema");
